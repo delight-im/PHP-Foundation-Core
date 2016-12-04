@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4e891f7699163763ac00adcf1228fbf5",
-    "content-hash": "f4a3b510f37dd9d7e314361ae784993b",
+    "hash": "ee23d89210822daaba8817480b050f09",
+    "content-hash": "12327bb214852fb6acbf50d9884f44c6",
     "packages": [
         {
             "name": "delight-im/auth",
-            "version": "v4.0.1",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Auth.git",
-                "reference": "36b590eb811dfa626e17c1bec57c8dabfd2fa575"
+                "reference": "78a16d8f500e100ea72d33b36ea91ce40af5828b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/36b590eb811dfa626e17c1bec57c8dabfd2fa575",
-                "reference": "36b590eb811dfa626e17c1bec57c8dabfd2fa575",
+                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/78a16d8f500e100ea72d33b36ea91ce40af5828b",
+                "reference": "78a16d8f500e100ea72d33b36ea91ce40af5828b",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "login",
                 "security"
             ],
-            "time": "2016-12-01 12:48:48"
+            "time": "2016-12-04 16:27:58"
         },
         {
             "name": "delight-im/cookie",
