@@ -25,7 +25,7 @@ final class App {
 	private $router;
 	/** @var string the path where private files may be stored by the application */
 	private $appStoragePath;
-	/** @var PdoDatabase the database connection */
+	/** @var PdoDatabase the database instance */
 	private $db;
 	/** @var Input the input helper for validation and filtering */
 	private $inputHelper;
@@ -60,8 +60,17 @@ final class App {
 		// remember the path to the storage private to this application
 		$this->appStoragePath = $appStoragePath;
 
-		// establish the database connection lazily
-		$this->db = null;
+		// configure the data source
+		$dataSource = new PdoDataSource($_ENV['DB_DRIVER']);
+		$dataSource->setHostname($_ENV['DB_HOST']);
+		$dataSource->setPort($_ENV['DB_PORT']);
+		$dataSource->setDatabaseName($_ENV['DB_NAME']);
+		$dataSource->setCharset($_ENV['DB_CHARSET']);
+		$dataSource->setUsername($_ENV['DB_USERNAME']);
+		$dataSource->setPassword($_ENV['DB_PASSWORD']);
+
+		// set up the database instance
+		$this->db = PdoDatabase::fromDataSource($dataSource);
 
 		// create a new input helper
 		$this->inputHelper = new Input();
@@ -99,29 +108,11 @@ final class App {
 	}
 
 	/**
-	 * Returns the database connection
-	 *
-	 * If there was no opened database connection before, it is created and opened automatically
+	 * Returns the database instance
 	 *
 	 * @return PdoDatabase the database instance
 	 */
 	public function db() {
-		// if the database connection has not been created yet
-		if (!isset($this->db)) {
-			// configure the data source
-			$dataSource = new PdoDataSource($_ENV['DB_DRIVER']);
-			$dataSource->setHostname($_ENV['DB_HOST']);
-			$dataSource->setPort($_ENV['DB_PORT']);
-			$dataSource->setDatabaseName($_ENV['DB_NAME']);
-			$dataSource->setCharset($_ENV['DB_CHARSET']);
-			$dataSource->setUsername($_ENV['DB_USERNAME']);
-			$dataSource->setPassword($_ENV['DB_PASSWORD']);
-
-			// create the database connection
-			$this->db = PdoDatabase::fromDataSource($dataSource);
-		}
-
-		// return the database connection
 		return $this->db;
 	}
 
