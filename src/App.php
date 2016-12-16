@@ -84,8 +84,8 @@ final class App {
 		// create the mailing component lazily
 		$this->mail = null;
 
-		// create the authentication component lazily
-		$this->auth = null;
+		// initialize the authentication component
+		$this->auth = new Auth($this->db());
 
 		// create the ID encoder and decoder lazily
 		$this->ids = null;
@@ -201,13 +201,6 @@ final class App {
 	 * @return Auth the authentication component
 	 */
 	public function auth() {
-		// if the component has not been created yet
-		if (!isset($this->auth)) {
-			// create the component
-			$this->auth = new Auth($this->db());
-		}
-
-		// return the component
 		return $this->auth;
 	}
 
