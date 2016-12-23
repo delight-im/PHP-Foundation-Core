@@ -539,6 +539,17 @@ final class App {
 	}
 
 	/**
+	 * Adds a new route for all of the specified HTTP request methods and executes the specified callback if the route matches
+	 *
+	 * @param string[] $requestMethods the request methods, one of which to match
+	 * @param string $route the route to match, e.g. `/users/jane`
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
+	 */
+	public function any(array $requestMethods, $route, $callback = null) {
+		$this->router->any($requestMethods, $route, $callback, [ $this ]) && exit;
+	}
+
+	/**
 	 * Sets the content type and character encoding for the HTTP response
 	 *
 	 * @param string $contentType the content type (or `text` or `html` as a shorthand)
