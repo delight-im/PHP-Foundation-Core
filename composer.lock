@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee23d89210822daaba8817480b050f09",
-    "content-hash": "12327bb214852fb6acbf50d9884f44c6",
+    "hash": "58d334d683f11dbc8732e2a3f19eda80",
+    "content-hash": "ec705ca638a63efaeed07953ce773287",
     "packages": [
         {
             "name": "delight-im/auth",
-            "version": "v4.1.0",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Auth.git",
-                "reference": "78a16d8f500e100ea72d33b36ea91ce40af5828b"
+                "reference": "6bfa29883613bd0cf93b9a269dec7970e6105233"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/78a16d8f500e100ea72d33b36ea91ce40af5828b",
-                "reference": "78a16d8f500e100ea72d33b36ea91ce40af5828b",
+                "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/6bfa29883613bd0cf93b9a269dec7970e6105233",
+                "reference": "6bfa29883613bd0cf93b9a269dec7970e6105233",
                 "shasum": ""
             },
             "require": {
@@ -45,25 +45,25 @@
                 "login",
                 "security"
             ],
-            "time": "2016-12-04 16:27:58"
+            "time": "2016-12-12 19:58:37"
         },
         {
             "name": "delight-im/cookie",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Cookie.git",
-                "reference": "3e41e0d44959b59de98722b5b1b1fb83f9f528f3"
+                "reference": "22f2c19750a6ad3dbf69a8ef3ea0e454a8e064fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Cookie/zipball/3e41e0d44959b59de98722b5b1b1fb83f9f528f3",
-                "reference": "3e41e0d44959b59de98722b5b1b1fb83f9f528f3",
+                "url": "https://api.github.com/repos/delight-im/PHP-Cookie/zipball/22f2c19750a6ad3dbf69a8ef3ea0e454a8e064fa",
+                "reference": "22f2c19750a6ad3dbf69a8ef3ea0e454a8e064fa",
                 "shasum": ""
             },
             "require": {
                 "delight-im/http": "^2.0",
-                "php": ">=5.3.0"
+                "php": ">=5.6.0"
             },
             "type": "library",
             "autoload": {
@@ -86,7 +86,7 @@
                 "samesite",
                 "xss"
             ],
-            "time": "2016-11-23 20:09:42"
+            "time": "2016-12-18 20:22:46"
         },
         {
             "name": "delight-im/db",
@@ -215,16 +215,16 @@
         },
         {
             "name": "delight-im/router",
-            "version": "v3.0.0",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Router.git",
-                "reference": "32dbdd189cc44deb81aa7e3caefc5c10123fe700"
+                "reference": "238ac8b540aba83ceebeb4b8e7f9bd11b48652ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Router/zipball/32dbdd189cc44deb81aa7e3caefc5c10123fe700",
-                "reference": "32dbdd189cc44deb81aa7e3caefc5c10123fe700",
+                "url": "https://api.github.com/repos/delight-im/PHP-Router/zipball/238ac8b540aba83ceebeb4b8e7f9bd11b48652ab",
+                "reference": "238ac8b540aba83ceebeb4b8e7f9bd11b48652ab",
                 "shasum": ""
             },
             "require": {
@@ -248,7 +248,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2016-09-05 18:21:14"
+            "time": "2016-12-23 22:45:42"
         },
         {
             "name": "delight-im/str",
