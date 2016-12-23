@@ -452,7 +452,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `GET` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function get($route, $callback = null) {
 		$this->router->get($route, $callback, [ $this ]) && exit;
@@ -462,7 +462,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `POST` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function post($route, $callback = null) {
 		$this->router->post($route, $callback, [ $this ]) && exit;
@@ -472,7 +472,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `PUT` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function put($route, $callback = null) {
 		$this->router->put($route, $callback, [ $this ]) && exit;
@@ -482,7 +482,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `PATCH` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function patch($route, $callback = null) {
 		$this->router->patch($route, $callback, [ $this ]) && exit;
@@ -492,7 +492,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `DELETE` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function delete($route, $callback = null) {
 		$this->router->delete($route, $callback, [ $this ]) && exit;
@@ -502,7 +502,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `HEAD` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function head($route, $callback = null) {
 		$this->router->head($route, $callback, [ $this ]) && exit;
@@ -512,7 +512,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `TRACE` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function trace($route, $callback = null) {
 		$this->router->trace($route, $callback, [ $this ]) && exit;
@@ -522,7 +522,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `OPTIONS` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function options($route, $callback = null) {
 		$this->router->options($route, $callback, [ $this ]) && exit;
@@ -532,7 +532,7 @@ final class App {
 	 * Adds a new route for the HTTP request method `CONNECT` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
-	 * @param callable|null $callback the callback to execute, e.g. an anonymous function
+	 * @param callable|null $callback (optional) the callback to execute, e.g. an anonymous function
 	 */
 	public function connect($route, $callback = null) {
 		$this->router->connect($route, $callback, [ $this ]) && exit;
