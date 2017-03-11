@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "58d334d683f11dbc8732e2a3f19eda80",
-    "content-hash": "ec705ca638a63efaeed07953ce773287",
+    "content-hash": "5a0706ccddae691eecc0855f2d98f85e",
     "packages": [
         {
             "name": "delight-im/auth",
@@ -45,7 +44,7 @@
                 "login",
                 "security"
             ],
-            "time": "2016-12-12 19:58:37"
+            "time": "2016-12-12T19:58:37+00:00"
         },
         {
             "name": "delight-im/cookie",
@@ -86,7 +85,7 @@
                 "samesite",
                 "xss"
             ],
-            "time": "2016-12-18 20:22:46"
+            "time": "2016-12-18T20:22:46+00:00"
         },
         {
             "name": "delight-im/db",
@@ -127,7 +126,46 @@
                 "sql",
                 "sqlite"
             ],
-            "time": "2016-12-01 12:40:36"
+            "time": "2016-12-01T12:40:36+00:00"
+        },
+        {
+            "name": "delight-im/file-upload",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delight-im/PHP-FileUpload.git",
+                "reference": "42aa56f1a50ef859efd52e92cce5f3f9f3900b0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/delight-im/PHP-FileUpload/zipball/42aa56f1a50ef859efd52e92cce5f3f9f3900b0e",
+                "reference": "42aa56f1a50ef859efd52e92cce5f3f9f3900b0e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Delight\\FileUpload\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple and convenient file uploads — secure by default",
+            "homepage": "https://github.com/delight-im/PHP-FileUpload",
+            "keywords": [
+                "file",
+                "files",
+                "form",
+                "input",
+                "upload",
+                "validation"
+            ],
+            "time": "2017-03-11T19:42:46+00:00"
         },
         {
             "name": "delight-im/http",
@@ -163,7 +201,7 @@
                 "http",
                 "https"
             ],
-            "time": "2016-07-21 15:05:01"
+            "time": "2016-07-21T15:05:01+00:00"
         },
         {
             "name": "delight-im/ids",
@@ -211,7 +249,7 @@
                 "obfuscation",
                 "shorten"
             ],
-            "time": "2016-09-10 15:18:16"
+            "time": "2016-09-10T15:18:16+00:00"
         },
         {
             "name": "delight-im/router",
@@ -248,7 +286,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2016-12-23 22:45:42"
+            "time": "2016-12-23T22:45:42+00:00"
         },
         {
             "name": "delight-im/str",
@@ -284,7 +322,7 @@
                 "string",
                 "strings"
             ],
-            "time": "2016-07-27 22:19:41"
+            "time": "2016-07-27T22:19:41+00:00"
         },
         {
             "name": "filp/whoops",
@@ -344,7 +382,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2016-10-11 15:32:23"
+            "time": "2016-10-11T15:32:23+00:00"
         },
         {
             "name": "jenssegers/optimus",
@@ -400,7 +438,7 @@
                 "obfuscation",
                 "optimus"
             ],
-            "time": "2016-11-07 15:24:01"
+            "time": "2016-11-07T15:24:01+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -453,7 +491,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-11-24 01:01:23"
+            "time": "2016-11-24T01:01:23+00:00"
         },
         {
             "name": "twig/twig",
@@ -514,7 +552,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-11-23 18:41:40"
+            "time": "2016-11-23T18:41:40+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -564,7 +602,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2016-09-01 10:05:43"
+            "time": "2016-09-01T10:05:43+00:00"
         }
     ],
     "packages-dev": [],
