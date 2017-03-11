@@ -11,6 +11,7 @@ namespace Delight\Foundation;
 use Delight\Auth\Auth;
 use Delight\Db\PdoDatabase;
 use Delight\Db\PdoDataSource;
+use Delight\FileUpload\FileUpload;
 use Delight\Ids\Id;
 use Delight\Router\Router;
 
@@ -232,6 +233,22 @@ final class App {
 	 */
 	public function flash() {
 		return $this->flash;
+	}
+
+	/**
+	 * Returns a new helper for convenient file uploads
+	 *
+	 * @param string $targetDirectory (optional) the target directory within the `storage` folder
+	 * @return FileUpload the helper instance
+	 */
+	public function upload($targetDirectory = null) {
+		$helper = new FileUpload();
+
+		if ($targetDirectory !== null) {
+			$helper->withTargetDirectory($this->getStoragePath($targetDirectory));
+		}
+
+		return $helper;
 	}
 
 	/**
