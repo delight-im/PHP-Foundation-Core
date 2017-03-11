@@ -556,15 +556,14 @@ final class App {
 	 * @param string|null $charset (optional) the character encoding (if the default does not work)
 	 */
 	public function setContentType($contentType, $charset = null) {
-		// if the shorthand for text content has been provided
-		if ($contentType === 'text') {
-			// expand it to the full name of the type
-			$contentType = 'text/plain';
-		}
-		// if the shorthand for HTML content has been provided
-		elseif ($contentType === 'html') {
-			// expand it to the full name of the type
-			$contentType = 'text/html';
+		// process shorthands for the content type or MIME type information
+		switch ($contentType) {
+			case 'text':
+				$contentType = 'text/plain';
+				break;
+			case 'html':
+				$contentType = 'text/html';
+				break;
 		}
 
 		// if no character encoding has been specified
