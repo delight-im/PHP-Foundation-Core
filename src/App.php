@@ -553,27 +553,30 @@ final class App {
 	 * Sets the content type and character encoding for the HTTP response
 	 *
 	 * @param string $contentType the content type or MIME type (or `text`, `html`, `json` or `xml` as shorthands)
-	 * @param string|null $charset (optional) the character encoding (if the default does not work)
+	 * @param string|null $charset (optional) the character encoding (or `auto` for the default)
 	 */
 	public function setContentType($contentType, $charset = null) {
 		// process shorthands for the content type or MIME type information
 		switch ($contentType) {
 			case 'text':
 				$contentType = 'text/plain';
+				$charset = isset($charset) ? $charset : 'auto';
 				break;
 			case 'html':
 				$contentType = 'text/html';
+				$charset = isset($charset) ? $charset : 'auto';
 				break;
 			case 'json':
 				$contentType = 'application/json';
 				break;
 			case 'xml':
 				$contentType = 'text/xml';
+				$charset = isset($charset) ? $charset : 'auto';
 				break;
 		}
 
-		// if no character encoding has been specified
-		if ($charset === null) {
+		// if the character encoding is to be determined automatically
+		if ($charset === 'auto') {
 			// if the internal character encoding has been configured
 			if (isset($_ENV['APP_CHARSET'])) {
 				// use the encoding from the configuration
