@@ -586,7 +586,13 @@ final class App {
 			}
 		}
 
-		header('Content-type: '.$contentType.'; charset='.$charset);
+		$headerLine = 'Content-type: ' . $contentType;
+
+		if ($charset !== null) {
+			$headerLine .= '; charset=' . $charset;
+		}
+
+		\header($headerLine);
 	}
 
 }
