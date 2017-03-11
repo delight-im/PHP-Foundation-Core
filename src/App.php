@@ -589,7 +589,7 @@ final class App {
 			}
 		}
 
-		$headerLine = 'Content-type: ' . $contentType;
+		$headerLine = 'Content-Type: ' . $contentType;
 
 		if ($charset !== null) {
 			$headerLine .= '; charset=' . $charset;
