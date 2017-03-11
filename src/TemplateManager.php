@@ -16,7 +16,10 @@ final class TemplateManager {
 	/** @var \Twig_Environment the Twig instance */
 	private $twig;
 
-	/** Constructor */
+	/**
+	 * @param string $templatesPath the path to the directory containing the templates
+	 * @param string $templatesCachePath the path to the directory where templates may be cached
+	 */
 	public function __construct($templatesPath, $templatesCachePath) {
 		// create a new Twig instance
 		$this->twig = new \Twig_Environment(
