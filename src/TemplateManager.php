@@ -29,7 +29,7 @@ final class TemplateManager {
 				'charset' => isset($_ENV['APP_CHARSET']) ? $_ENV['APP_CHARSET'] : self::CHARSET_DEFAULT,
 				'debug' => false,
 				'auto_reload' => isset($_ENV['APP_DEBUG']) ? $_ENV['APP_DEBUG'] : true,
-				'autoescape' => true
+				'autoescape' => 'html'
 			)
 		);
 	}
