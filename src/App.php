@@ -309,6 +309,28 @@ final class App {
 	}
 
 	/**
+	 * Sends the specified file to the client
+	 *
+	 * @param string $filePath the path to the file that should be served
+	 * @param string $mimeType the MIME type for the output, e.g. `image/jpeg`
+	 */
+	public function serveFile($filePath, $mimeType) {
+		// if the file exists at the specified path
+		if (\file_exists($filePath) && \is_file($filePath)) {
+			\header('Content-Type: ' . $mimeType, true);
+			\header('Accept-Ranges: none', true);
+			\header('Connection: close', true);
+
+			// pipe the actual file contents through PHP
+			\readfile($filePath);
+		}
+		// if the file could not be found
+		else {
+			throw new \RuntimeException('File `' . $filePath . '` not found');
+		}
+	}
+
+	/**
 	 * Detects whether the current request has been sent over plain HTTP (as opposed to secure HTTPS)
 	 *
 	 * @return bool whether the current request is a HTTP request
