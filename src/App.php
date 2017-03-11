@@ -273,7 +273,7 @@ final class App {
 	 */
 	public function downloadFile($filePath, $suggestedFilename, $mimeType = null) {
 		// if the file exists at the specified path
-		if (file_exists($filePath)) {
+		if (\file_exists($filePath) && \is_file($filePath)) {
 			// if no MIME type has been provided explicitly
 			if ($mimeType === null) {
 				// use a reasonable default value
