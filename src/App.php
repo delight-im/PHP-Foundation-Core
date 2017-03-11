@@ -552,7 +552,7 @@ final class App {
 	/**
 	 * Sets the content type and character encoding for the HTTP response
 	 *
-	 * @param string $contentType the content type or MIME type (or `text` or `html` as shorthands)
+	 * @param string $contentType the content type or MIME type (or `text`, `html`, `json` or `xml` as shorthands)
 	 * @param string|null $charset (optional) the character encoding (if the default does not work)
 	 */
 	public function setContentType($contentType, $charset = null) {
@@ -563,6 +563,12 @@ final class App {
 				break;
 			case 'html':
 				$contentType = 'text/html';
+				break;
+			case 'json':
+				$contentType = 'application/json';
+				break;
+			case 'xml':
+				$contentType = 'text/xml';
 				break;
 		}
 
