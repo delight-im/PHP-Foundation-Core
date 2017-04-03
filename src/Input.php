@@ -11,7 +11,7 @@ namespace Delight\Foundation;
 /** Input validation and filtering */
 final class Input {
 
-	/** Validates a value as a single-line string by removing control characters and leading or trailing whitespace */
+	/** Validates a value as a single-line string by removing control characters, backticks and leading or trailing whitespace */
 	const DATA_TYPE_STRING = 1;
 	/** Validates a value as an integer number and returns `null` for all invalid values */
 	const DATA_TYPE_INT = 2;
@@ -27,6 +27,8 @@ final class Input {
 	const DATA_TYPE_IP = 7;
 	/** Validates a value as a multi-line string by removing control characters (except for tabs and newlines) and leading or trailing whitespace */
 	const DATA_TYPE_TEXT = 8;
+	/** Does not perform any validation and just returns unfiltered input */
+	const DATA_TYPE_RAW = 9;
 
 	/**
 	 * Returns a validated, filtered and typecast value from the `GET` variables
@@ -150,11 +152,11 @@ final class Input {
 		$flags = 0;
 
 		$flags |= \FILTER_NULL_ON_FAILURE;
-		$flags |= \FILTER_FLAG_STRIP_BACKTICK;
 		$flags |= \FILTER_FLAG_NO_ENCODE_QUOTES;
 
-		if ($type !== self::DATA_TYPE_TEXT) {
+		if ($type !== self::DATA_TYPE_TEXT && $type !== self::DATA_TYPE_RAW) {
 			$flags |= \FILTER_FLAG_STRIP_LOW;
+			$flags |= \FILTER_FLAG_STRIP_BACKTICK;
 		}
 
 		$flags |= \FILTER_FLAG_ALLOW_FRACTION;
