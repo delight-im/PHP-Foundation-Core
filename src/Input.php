@@ -31,9 +31,9 @@ final class Input {
 	/**
 	 * Returns a validated, filtered and typecast value from the `GET` variables
 	 *
-	 * @param string $key the key or name of the variable to return
-	 * @param int $type the data type using one of the `DATA_TYPE_*` constants
-	 * @return mixed the validated, filtered and typecast value where the data type depends on the second parameter
+	 * @param string $key the name of the element to return from the `GET` variables
+	 * @param int $type one of the constants from this class starting with `DATA_TYPE_`
+	 * @return mixed|null the validated, filtered and typecast value of the requested data type
 	 */
 	public function get($key, $type = self::DATA_TYPE_STRING) {
 		if (!isset($_GET[$key])) {
@@ -52,9 +52,9 @@ final class Input {
 	/**
 	 * Returns a validated, filtered and typecast value from the `POST` variables
 	 *
-	 * @param string $key the key or name of the variable to return
-	 * @param int $type the data type using one of the `DATA_TYPE_*` constants
-	 * @return mixed the validated, filtered and typecast value where the data type depends on the second parameter
+	 * @param string $key the name of the element to return from the `POST` variables
+	 * @param int $type one of the constants from this class starting with `DATA_TYPE_`
+	 * @return mixed|null the validated, filtered and typecast value of the requested data type
 	 */
 	public function post($key, $type = self::DATA_TYPE_STRING) {
 		if (!isset($_POST[$key])) {
@@ -73,9 +73,9 @@ final class Input {
 	/**
 	 * Returns a validated, filtered and typecast value from the cookies
 	 *
-	 * @param string $key the key or name of the variable to return
-	 * @param int $type the data type using one of the `DATA_TYPE_*` constants
-	 * @return mixed the validated, filtered and typecast value where the data type depends on the second parameter
+	 * @param string $key the name of the element to return from the cookies
+	 * @param int $type one of the constants from this class starting with `DATA_TYPE_`
+	 * @return mixed|null the validated, filtered and typecast value of the requested data type
 	 */
 	public function cookie($key, $type = self::DATA_TYPE_STRING) {
 		if (!isset($_COOKIE[$key])) {
@@ -95,8 +95,8 @@ final class Input {
 	 * Returns a validated, filtered and typecast value from the given variable
 	 *
 	 * @param mixed $variable the variable to validate
-	 * @param int $type the data type using one of the `DATA_TYPE_*` constants
-	 * @return mixed the validated, filtered and typecast value where the data type depends on the second parameter
+	 * @param int $type one of the constants from this class starting with `DATA_TYPE_`
+	 * @return mixed|null the validated, filtered and typecast value of the requested data type
 	 */
 	public function value($variable, $type = self::DATA_TYPE_STRING) {
 		if (!isset($variable)) {
