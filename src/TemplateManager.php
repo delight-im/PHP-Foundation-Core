@@ -28,7 +28,7 @@ final class TemplateManager {
 				'cache' => $templatesCachePath,
 				'charset' => isset($_ENV['APP_CHARSET']) ? $_ENV['APP_CHARSET'] : self::CHARSET_DEFAULT,
 				'debug' => false,
-				'auto_reload' => isset($_ENV['APP_DEBUG']) ? $_ENV['APP_DEBUG'] : true,
+				'auto_reload' => true,
 				'autoescape' => 'html'
 			)
 		);
