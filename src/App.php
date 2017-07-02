@@ -42,8 +42,6 @@ final class App {
 	private $flash;
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $appStoragePath the path to the directory for private storage in this application
 	 * @param string $templatesPath the path to the directory containing the templates
 	 * @param string $frameworkStoragePath the path to the directory for this framework's internal storage
