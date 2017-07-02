@@ -16,7 +16,7 @@ use Delight\Ids\Id;
 use Delight\Router\Router;
 
 /** Main application class in the framework */
-final class App {
+class App {
 
 	const TEMPLATES_CACHE_SUBFOLDER = '/views/cache';
 
