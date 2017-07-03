@@ -28,7 +28,7 @@ class App {
 	private $appStoragePath;
 	/** @var PdoDatabase the database instance */
 	private $db;
-	/** @var Input the input helper for validation and filtering */
+	/** @var Input|null the input helper for validation and filtering */
 	private $inputHelper;
 	/** @var TemplateManager the template manager */
 	private $templateManager;
@@ -71,8 +71,8 @@ class App {
 		// set up the database instance
 		$this->db = PdoDatabase::fromDataSource($dataSource);
 
-		// create a new input helper
-		$this->inputHelper = new Input();
+		// create the input helper lazily
+		$this->inputHelper = null;
 
 		// initialize the template manager
 		$this->templateManager = new TemplateManager($templatesPath, $frameworkStoragePath . self::TEMPLATES_CACHE_SUBFOLDER);
@@ -121,6 +121,13 @@ class App {
 	 * @return Input the input helper
 	 */
 	public function input() {
+		// if the component has not been created yet
+		if (!isset($this->inputHelper)) {
+			// create the component
+			$this->inputHelper = new Input();
+		}
+
+		// return the component
 		return $this->inputHelper;
 	}
 
