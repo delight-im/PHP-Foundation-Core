@@ -24,7 +24,7 @@ class App {
 	private $rootUrl;
 	/** @var Router */
 	private $router;
-	/** @var string the path where private files may be stored by the application */
+	/** @var string the path to the directory for private storage in this application */
 	private $appStoragePath;
 	/** @var PdoDatabase the database instance */
 	private $db;
