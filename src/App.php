@@ -34,7 +34,7 @@ class App {
 	private $db;
 	/** @var Input|null the input helper for validation and filtering */
 	private $inputHelper;
-	/** @var TemplateManager the template manager */
+	/** @var TemplateManager|null the template manager */
 	private $templateManager;
 	/** @var \Swift_Mailer|null */
 	private $mail;
@@ -80,11 +80,8 @@ class App {
 		// create the input helper lazily
 		$this->inputHelper = null;
 
-		// initialize the template manager
-		$this->templateManager = new TemplateManager($templatesPath, $frameworkStoragePath . self::TEMPLATES_CACHE_SUBFOLDER);
-
-		// add the this object as a global to the template manager
-		$this->templateManager->addGlobal('app', $this);
+		// create the template manager lazily
+		$this->templateManager = null;
 
 		// create the mailing component lazily
 		$this->mail = null;
@@ -148,7 +145,7 @@ class App {
 	 */
 	public function view($viewName, $data = array()) {
 		// render the template and return the evaluated HTML
-		return $this->templateManager->render($viewName, $data);
+		return $this->getTemplateManager()->render($viewName, $data);
 	}
 
 	/**
@@ -157,6 +154,16 @@ class App {
 	 * @return TemplateManager the template manager
 	 */
 	public function getTemplateManager() {
+		// if the component has not been created yet
+		if (!isset($this->templateManager)) {
+			// create the component
+			$this->templateManager = new TemplateManager($this->templatesPath, $this->frameworkStoragePath . self::TEMPLATES_CACHE_SUBFOLDER);
+
+			// add the current instance as a global to the template manager
+			$this->templateManager->addGlobal('app', $this);
+		}
+
+		// return the component
 		return $this->templateManager;
 	}
 
