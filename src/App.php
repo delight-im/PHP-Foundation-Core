@@ -26,6 +26,10 @@ class App {
 	private $router;
 	/** @var string the path to the directory for private storage in this application */
 	private $appStoragePath;
+	/** @var string the path to the directory containing the templates */
+	private $templatesPath;
+	/** @var string the path to the directory for this framework's internal storage */
+	private $frameworkStoragePath;
 	/** @var PdoDatabase the database instance */
 	private $db;
 	/** @var Input|null the input helper for validation and filtering */
@@ -56,8 +60,10 @@ class App {
 		// get a router instance for the detected root path
 		$this->router = new Router($rootPath);
 
-		// remember the path to the storage private to this application
+		// remember some relevant paths on the file system
 		$this->appStoragePath = $appStoragePath;
+		$this->templatesPath = $templatesPath;
+		$this->frameworkStoragePath = $frameworkStoragePath;
 
 		// configure the data source
 		$dataSource = new PdoDataSource($_ENV['DB_DRIVER']);
