@@ -38,7 +38,7 @@ class App {
 	private $auth;
 	/** @var Id|null the ID encoder and decoder */
 	private $ids;
-	/** @var Flash the flash message handler */
+	/** @var Flash|null the flash message handler */
 	private $flash;
 
 	/**
@@ -89,8 +89,8 @@ class App {
 		// create the ID encoder and decoder lazily
 		$this->ids = null;
 
-		// create a new flash message handler
-		$this->flash = new Flash();
+		// create the flash message handler lazily
+		$this->flash = null;
 	}
 
 	/**
@@ -230,6 +230,13 @@ class App {
 	 * @return Flash the flash message handler
 	 */
 	public function flash() {
+		// if the component has not been created yet
+		if (!isset($this->flash)) {
+			// create the component
+			$this->flash = new Flash();
+		}
+
+		// return the component
 		return $this->flash;
 	}
 
