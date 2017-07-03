@@ -32,11 +32,11 @@ class App {
 	private $inputHelper;
 	/** @var TemplateManager the template manager */
 	private $templateManager;
-	/** @var \Swift_Mailer */
+	/** @var \Swift_Mailer|null */
 	private $mail;
 	/** @var Auth the authentication component */
 	private $auth;
-	/** @var Id the ID encoder and decoder */
+	/** @var Id|null the ID encoder and decoder */
 	private $ids;
 	/** @var Flash the flash message handler */
 	private $flash;
