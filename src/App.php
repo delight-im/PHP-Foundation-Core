@@ -635,4 +635,40 @@ class App {
 		\header($headerLine);
 	}
 
+	/**
+	 * Returns whether any file uploads have been sent with the current request
+	 *
+	 * @return bool
+	 */
+	function hasUploads() {
+		return !empty($_FILES);
+	}
+
+	/**
+	 * Returns whether the specified file upload has been sent with the current request
+	 *
+	 * @param string $name the name of the file upload, i.e. usually the name of the HTML input field
+	 * @return bool
+	 */
+	function hasUpload($name) {
+		// if information about the specified file upload is available
+		if (isset($_FILES[$name])) {
+			// if the file input had an array-style name
+			if (\is_array($_FILES[$name]['error'])) {
+				// for any file selected from this input
+				foreach ($_FILES[$name]['error'] as $errorCode) {
+					if ($errorCode !== \UPLOAD_ERR_NO_FILE) {
+						return true;
+					}
+				}
+			}
+			// if the file input had a scalar-style name
+			else {
+				return $_FILES[$name]['error'] !== \UPLOAD_ERR_NO_FILE;
+			}
+		}
+
+		return false;
+	}
+
 }
