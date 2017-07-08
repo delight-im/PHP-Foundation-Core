@@ -7,13 +7,19 @@ Core of [PHP-Foundation](https://github.com/delight-im/PHP-Foundation)
  * PHP 5.6.0+
    * `mbstring` extension
 
-## Installation (via [Composer](https://getcomposer.org/))
+## Installation
 
-`$ composer require delight-im/foundation-core`
+ 1. Include the library via Composer [[?]](https://github.com/delight-im/Knowledge/blob/master/Composer%20(PHP).md):
 
-Include the Composer autoloader:
+    ```
+    $ composer require delight-im/foundation-core
+    ```
 
-`require __DIR__.'/vendor/autoload.php';`
+ 1. Include the Composer autoloader:
+
+    ```php
+    require __DIR__ . '/vendor/autoload.php';
+    ```
 
 ## Contributing
 
