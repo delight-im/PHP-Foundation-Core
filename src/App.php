@@ -87,7 +87,10 @@ class App {
 		$this->mail = null;
 
 		// initialize the authentication component
-		$this->auth = new Auth($this->db(), $this->getClientIp());
+		$this->auth = new Auth(
+			$this->db(),
+			$this->getClientIp()
+		);
 
 		// create the ID encoder and decoder lazily
 		$this->ids = null;
