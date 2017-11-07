@@ -86,11 +86,8 @@ class App {
 		// create the mailing component lazily
 		$this->mail = null;
 
-		// determine whether HTTPS should be enforced
-		$forceHttps = isset($_ENV['APP_PUBLIC_URL']) && \stripos($_ENV['APP_PUBLIC_URL'], 'https:') === 0 && $this->isHttps();
-
 		// initialize the authentication component
-		$this->auth = new Auth($this->db(), $forceHttps);
+		$this->auth = new Auth($this->db());
 
 		// create the ID encoder and decoder lazily
 		$this->ids = null;
