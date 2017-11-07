@@ -14,5 +14,9 @@ header('Content-type: text/plain; charset=utf-8');
 
 require __DIR__.'/../vendor/autoload.php';
 
-$app = new \Delight\Foundation\App(__DIR__.'/../storage/app', __DIR__.'/../views', __DIR__.'/../storage/framework');
+$app = new \Delight\Foundation\App(
+	__DIR__.'/../storage/app',
+	__DIR__.'/../views',
+	__DIR__.'/../storage/framework'
+);
 var_dump($app);
