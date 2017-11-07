@@ -89,7 +89,8 @@ class App {
 		// initialize the authentication component
 		$this->auth = new Auth(
 			$this->db(),
-			$this->getClientIp()
+			$this->getClientIp(),
+			isset($_ENV['DB_PREFIX']) ? $_ENV['DB_PREFIX'] : null
 		);
 
 		// create the ID encoder and decoder lazily
