@@ -4,7 +4,7 @@
 	"require": {
 		"php": ">=5.6.0",
 		"ext-mbstring": "*",
-		"delight-im/auth": "^7.1",
+		"delight-im/auth": "^7.6 || ^8.0",
 		"delight-im/cookie": "^3.1",
 		"delight-im/db": "^1.2",
 		"delight-im/file-upload": "^1.0",
