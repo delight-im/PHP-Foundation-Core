@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dac2678704c6795b1f1e4f5a558fe8f6",
+    "content-hash": "102f8d8a0fa8a403fe3d25ea133d1025",
     "packages": [
         {
             "name": "delight-im/auth",
