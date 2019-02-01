@@ -71,6 +71,16 @@ final class TemplateManager {
 	}
 
 	/**
+	 * Adds a function that can then be used inside of all templates via the `{{ myFunction(...) }}` syntax
+	 *
+	 * @param string $name the name of the function under which it should be available
+	 * @param callable $callback the implementation of the function to be used in templates
+	 */
+	public function addFunction($name, callable $callback) {
+		$this->twig->addFunction(new \Twig_SimpleFunction($name, $callback));
+	}
+
+	/**
 	 * Changes the syntax recognized by the template engine
 	 *
 	 * @param string $commentStart the start delimiter for comments
