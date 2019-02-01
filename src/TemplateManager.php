@@ -49,7 +49,7 @@ final class TemplateManager {
 	}
 
 	/**
-	 * Adds a filter that can then be used inside of all templates via the `{{ myVariable | filterName }}` syntax
+	 * Adds a filter that can then be used inside of all templates via the `{{ myVariable | myFilter }}` syntax
 	 *
 	 * @param string $name the name of the filter under which it should be available
 	 * @param callable $callback the function that performs the filtering (with the input as its single parameter)
@@ -59,12 +59,12 @@ final class TemplateManager {
 	}
 
 	/**
-	 * Adds a new global that can then be accessed inside of all templates just like every other variable, e.g. `{{ myGlobal }}`
+	 * Adds a global variable that can then be accessed inside of all templates just like every other variable, e.g. `{{ myGlobal }}`
 	 *
 	 * Array elements and object properties can be accessed after a dot (`.`), e.g. `{{ myGlobal.property }}`
 	 *
-	 * @param string $name the name of the global under which it should be available
-	 * @param mixed $value the value of the global to be used in the templates
+	 * @param string $name the name of the global variable under which it should be available
+	 * @param mixed $value the value of the global to be used in templates
 	 */
 	public function addGlobal($name, $value) {
 		$this->twig->addGlobal($name, $value);
