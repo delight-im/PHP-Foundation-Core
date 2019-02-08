@@ -52,7 +52,7 @@ class App {
 	 */
 	public function __construct($appStoragePath, $templatesPath, $frameworkStoragePath) {
 		// get the root URL from the configuration
-		$this->rootUrl = isset($_ENV['APP_PUBLIC_URL']) ? rtrim($_ENV['APP_PUBLIC_URL'], '/') : '';
+		$this->rootUrl = self::determineRootUrl();
 
 		// detect the root path for the router from the root URL
 		$rootPath = urldecode(parse_url($this->rootUrl, PHP_URL_PATH));
@@ -700,6 +700,27 @@ class App {
 		}
 
 		return false;
+	}
+
+	private static function determineRootUrl() {
+		if (isset($_ENV['APP_PUBLIC_URL'])) {
+			$candidates = \explode('|', $_ENV['APP_PUBLIC_URL']);
+			$rootUrl = \array_shift($candidates);
+
+			foreach ($candidates as $candidate) {
+				$candidateHost = \parse_url($candidate, \PHP_URL_HOST);
+
+				if (\strcasecmp($candidateHost, $_SERVER['SERVER_NAME']) === 0) {
+					$rootUrl = $candidate;
+					break;
+				}
+			}
+
+			return \rtrim($rootUrl, '/');
+		}
+		else {
+			return '';
+		}
 	}
 
 }
