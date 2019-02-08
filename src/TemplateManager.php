@@ -8,6 +8,8 @@
 
 namespace Delight\Foundation;
 
+use Delight\Foundation\Throwable\TemplateNotFoundError;
+
 /** Template manager that renders views */
 final class TemplateManager {
 
@@ -44,7 +46,12 @@ final class TemplateManager {
 	 * @return string the rendered template (usually HTML)
 	 */
 	public function render($viewName, $data = array()) {
-		return $this->twig->render($viewName, $data);
+		try {
+			return $this->twig->render($viewName, $data);
+		}
+		catch (\Twig_Error_Loader $e) {
+			throw new TemplateNotFoundError($e->getMessage());
+		}
 	}
 
 	/**
