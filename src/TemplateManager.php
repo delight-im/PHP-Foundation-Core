@@ -44,7 +44,6 @@ final class TemplateManager {
 	 * @return string the rendered template (usually HTML)
 	 */
 	public function render($viewName, $data = array()) {
-		// render the template and return the evaluated HTML
 		return $this->twig->render($viewName, $data);
 	}
 
