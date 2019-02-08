@@ -22,6 +22,8 @@ class App {
 
 	/** @var string the root URL as whitelisted in the configuration */
 	private $rootUrl;
+	/** @var string|null the host as whitelisted in the configuration */
+	private $canonicalHost;
 	/** @var Router */
 	private $router;
 	/** @var string the path to the directory for private storage in this application */
@@ -53,6 +55,10 @@ class App {
 	public function __construct($appStoragePath, $templatesPath, $frameworkStoragePath) {
 		// get the root URL as whitelisted in the configuration
 		$this->rootUrl = self::determineRootUrl();
+
+		if (!empty($this->rootUrl)) {
+			$this->canonicalHost = \parse_url($this->rootUrl, \PHP_URL_HOST);
+		}
 
 		// detect the root path for the router from the root URL
 		$rootPath = urldecode(parse_url($this->rootUrl, PHP_URL_PATH));
@@ -435,6 +441,15 @@ class App {
 	 */
 	public function getHost() {
 		return $_SERVER['SERVER_NAME'];
+	}
+
+	/**
+	 * Returns the host as whitelisted in the configuration
+	 *
+	 * @return string|null
+	 */
+	public function getCanonicalHost() {
+		return $this->canonicalHost;
 	}
 
 	/**
