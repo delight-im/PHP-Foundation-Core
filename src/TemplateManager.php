@@ -24,17 +24,23 @@ final class TemplateManager {
 	 * @param string $templatesCachePath the path to the directory where templates may be cached
 	 */
 	public function __construct($templatesPath, $templatesCachePath) {
+		$debug = !isset($_ENV['APP_DEBUG']) || $_ENV['APP_DEBUG'] === '1';
+
 		// create a new Twig instance
 		$this->twig = new \Twig_Environment(
 			new \Twig_Loader_Filesystem($templatesPath),
 			array(
 				'cache' => $templatesCachePath,
 				'charset' => isset($_ENV['APP_CHARSET']) ? $_ENV['APP_CHARSET'] : self::CHARSET_DEFAULT,
-				'debug' => false,
+				'debug' => $debug,
 				'auto_reload' => true,
 				'autoescape' => 'html'
 			)
 		);
+
+		if ($debug) {
+			$this->twig->addExtension(new \Twig_Extension_Debug());
+		}
 	}
 
 	/**
