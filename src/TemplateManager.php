@@ -9,6 +9,7 @@
 namespace Delight\Foundation;
 
 use Delight\Foundation\Throwable\TemplateNotFoundError;
+use Delight\Foundation\Throwable\TemplateSyntaxError;
 
 /** Template manager that renders views */
 final class TemplateManager {
@@ -51,6 +52,9 @@ final class TemplateManager {
 		}
 		catch (\Twig_Error_Loader $e) {
 			throw new TemplateNotFoundError($e->getMessage());
+		}
+		catch (\Twig_Error_Syntax $e) {
+			throw new TemplateSyntaxError($e->getMessage(), 0, $e);
 		}
 	}
 
