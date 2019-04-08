@@ -75,6 +75,8 @@ class App {
 		$dataSource = new PdoDataSource($_ENV['DB_DRIVER']);
 		$dataSource->setHostname(!empty($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : null);
 		$dataSource->setPort(!empty($_ENV['DB_PORT']) ? $_ENV['DB_PORT'] : null);
+		$dataSource->setFilePath(!empty($_ENV['DB_FILE_PATH']) ? $_ENV['DB_FILE_PATH'] : null);
+		$dataSource->setMemory(isset($_ENV['DB_IN_MEMORY']) && \is_numeric($_ENV['DB_IN_MEMORY']) ? $_ENV['DB_IN_MEMORY'] : null);
 		$dataSource->setDatabaseName(!empty($_ENV['DB_NAME']) ? $_ENV['DB_NAME'] : null);
 		$dataSource->setCharset(!empty($_ENV['DB_CHARSET']) ? $_ENV['DB_CHARSET'] : null);
 		$dataSource->setUsername(!empty($_ENV['DB_USERNAME']) ? $_ENV['DB_USERNAME'] : null);
