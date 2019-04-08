@@ -73,12 +73,12 @@ class App {
 
 		// configure the data source
 		$dataSource = new PdoDataSource($_ENV['DB_DRIVER']);
-		$dataSource->setHostname($_ENV['DB_HOST']);
-		$dataSource->setPort($_ENV['DB_PORT']);
-		$dataSource->setDatabaseName($_ENV['DB_NAME']);
-		$dataSource->setCharset($_ENV['DB_CHARSET']);
-		$dataSource->setUsername($_ENV['DB_USERNAME']);
-		$dataSource->setPassword($_ENV['DB_PASSWORD']);
+		$dataSource->setHostname(!empty($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : null);
+		$dataSource->setPort(!empty($_ENV['DB_PORT']) ? $_ENV['DB_PORT'] : null);
+		$dataSource->setDatabaseName(!empty($_ENV['DB_NAME']) ? $_ENV['DB_NAME'] : null);
+		$dataSource->setCharset(!empty($_ENV['DB_CHARSET']) ? $_ENV['DB_CHARSET'] : null);
+		$dataSource->setUsername(!empty($_ENV['DB_USERNAME']) ? $_ENV['DB_USERNAME'] : null);
+		$dataSource->setPassword(!empty($_ENV['DB_PASSWORD']) ? $_ENV['DB_PASSWORD'] : null);
 
 		// set up the database instance
 		$this->db = PdoDatabase::fromDataSource($dataSource);
@@ -96,7 +96,7 @@ class App {
 		$this->auth = new Auth(
 			$this->db(),
 			$this->getClientIp(),
-			isset($_ENV['DB_PREFIX']) ? $_ENV['DB_PREFIX'] : null
+			!empty($_ENV['DB_PREFIX']) ? $_ENV['DB_PREFIX'] : null
 		);
 
 		// create the ID encoder and decoder lazily
