@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2ffb40a5f2a8cba954ef29bc2e327b1",
+    "content-hash": "77abde0a95033cabf62c840f4ddd158a",
     "packages": [
         {
             "name": "delight-im/auth",
@@ -244,6 +244,50 @@
                 "https"
             ],
             "time": "2016-07-21T15:05:01+00:00"
+        },
+        {
+            "name": "delight-im/i18n",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delight-im/PHP-I18N.git",
+                "reference": "370a9837b603f25a835cdd7b121704f9b33076cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/delight-im/PHP-I18N/zipball/370a9837b603f25a835cdd7b121704f9b33076cb",
+                "reference": "370a9837b603f25a835cdd7b121704f9b33076cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gettext": "*",
+                "ext-intl": "*",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Delight\\I18n\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Internationalization and localization for PHP",
+            "homepage": "https://github.com/delight-im/PHP-I18N",
+            "keywords": [
+                "gettext",
+                "i18n",
+                "internationalization",
+                "intl",
+                "l10n",
+                "language",
+                "locale",
+                "localization",
+                "translation"
+            ],
+            "time": "2019-03-20T21:52:24+00:00"
         },
         {
             "name": "delight-im/ids",
