@@ -8,6 +8,7 @@
 
 namespace Delight\Foundation;
 
+use Delight\Foundation\Throwable\TemplateEvaluationError;
 use Delight\Foundation\Throwable\TemplateManagerSetupError;
 use Delight\Foundation\Throwable\TemplateNotFoundError;
 use Delight\Foundation\Throwable\TemplateSyntaxError;
@@ -62,6 +63,9 @@ final class TemplateManager {
 		}
 		catch (\Twig_Error_Syntax $e) {
 			throw new TemplateSyntaxError($e->getMessage(), 0, $e);
+		}
+		catch (\Twig_Error_Runtime $e) {
+			throw new TemplateEvaluationError($e->getMessage(), 0, $e);
 		}
 	}
 
@@ -159,6 +163,9 @@ final class TemplateManager {
 							}
 							catch (\Twig_Error_Syntax $e) {
 								throw new TemplateSyntaxError($e->getMessage(), 0, $e);
+							}
+							catch (\Twig_Error_Runtime $e) {
+								throw new TemplateEvaluationError($e->getMessage(), 0, $e);
 							}
 						}
 					}
