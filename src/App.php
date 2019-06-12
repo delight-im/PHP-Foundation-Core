@@ -12,6 +12,8 @@ use Delight\Auth\Auth;
 use Delight\Db\PdoDatabase;
 use Delight\Db\PdoDataSource;
 use Delight\FileUpload\FileUpload;
+use Delight\Foundation\Throwable\NoSupportedLocaleError;
+use Delight\I18n\I18n;
 use Delight\Ids\Id;
 use Delight\Router\Router;
 
@@ -42,6 +44,8 @@ class App {
 	private $mail;
 	/** @var Auth the authentication component */
 	private $auth;
+	/** @var I18n|null the internationalization component */
+	private $i18n;
 	/** @var Id|null the ID encoder and decoder */
 	private $ids;
 	/** @var Flash|null the flash message handler */
@@ -100,6 +104,17 @@ class App {
 			$this->getClientIp(),
 			!empty($_ENV['DB_PREFIX']) ? $_ENV['DB_PREFIX'] : null
 		);
+
+		// initialize the internationalization component
+		if (!empty($_ENV['I18N_SUPPORTED_LOCALES'])) {
+			$this->i18n = new I18n(
+				\preg_split('/\s*,\s*/', $_ENV['I18N_SUPPORTED_LOCALES'], -1, \PREG_SPLIT_NO_EMPTY)
+			);
+			$this->i18n->setSessionField(!empty($_ENV['I18N_SESSION_FIELD']) ? $_ENV['I18N_SESSION_FIELD'] : null);
+			$this->i18n->setCookieName(!empty($_ENV['I18N_COOKIE_NAME']) ? $_ENV['I18N_COOKIE_NAME'] : null);
+			$this->i18n->setCookieLifetime(!empty($_ENV['I18N_COOKIE_LIFETIME']) ? $_ENV['I18N_COOKIE_LIFETIME'] : null);
+			$this->i18n->setLocaleAutomatically();
+		}
 
 		// create the ID encoder and decoder lazily
 		$this->ids = null;
@@ -173,6 +188,17 @@ class App {
 
 			// add the current instance as a global to the template manager
 			$this->templateManager->addGlobal('app', $this);
+
+			// add functions for internationalization as globals to the template manager
+			if (isset($this->i18n)) {
+				$i18nMarkupFunctions = [ '_', '_f', '_fe', '_p', '_pf', '_pfe', '_c', '_m' ];
+
+				foreach ($i18nMarkupFunctions as $i18nMarkupFunction) {
+					if (\function_exists($i18nMarkupFunction)) {
+						$this->templateManager->addFunction($i18nMarkupFunction, $i18nMarkupFunction);
+					}
+				}
+			}
 		}
 
 		// return the component
@@ -233,6 +259,19 @@ class App {
 	 */
 	public function auth() {
 		return $this->auth;
+	}
+
+	/**
+	 * Returns the internationalization component
+	 *
+	 * @return I18n the internationalization component
+	 */
+	public function i18n() {
+		if (!isset($this->i18n)) {
+			throw new NoSupportedLocaleError();
+		}
+
+		return $this->i18n;
 	}
 
 	/**
