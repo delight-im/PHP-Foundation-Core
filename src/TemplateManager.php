@@ -8,6 +8,7 @@
 
 namespace Delight\Foundation;
 
+use Delight\Foundation\Throwable\TemplateManagerSetupError;
 use Delight\Foundation\Throwable\TemplateNotFoundError;
 use Delight\Foundation\Throwable\TemplateSyntaxError;
 
@@ -124,6 +125,52 @@ final class TemplateManager {
 			'tag_variable' => array(empty($variableStart) ? '{{' : $variableStart, empty($variableEnd) ? '}}' : $variableEnd),
 			'interpolation' => array(empty($interpolationStart) ? '#{' : $interpolationStart, empty($interpolationEnd) ? '}' : $interpolationEnd)
 		)));
+	}
+
+	/** Loads (i.e. lexes, parses and compiles) and caches all templates without evaluating them */
+	public function precompile() {
+		if (isset($this->twig) && $this->twig instanceof \Twig_Environment) {
+			$loader = $this->twig->getLoader();
+
+			if (isset($loader) && $loader instanceof \Twig_Loader_Filesystem) {
+				$templateDirs = $loader->getPaths(\Twig_Loader_Filesystem::MAIN_NAMESPACE);
+
+				foreach ($templateDirs as $templateDir) {
+					$templateDir .= '/';
+					$templates = new \RecursiveIteratorIterator(
+						new \RecursiveDirectoryIterator($templateDir),
+						\RecursiveIteratorIterator::LEAVES_ONLY
+					);
+
+					foreach ($templates as $template) {
+						if ($template->isFile()) {
+							if (\strpos($template, $templateDir) === 0) {
+								$templateName = \substr($template, \strlen($templateDir));
+							}
+							else {
+								$templateName = (string) $template;
+							}
+
+							try {
+								$this->twig->loadTemplate($templateName);
+							}
+							catch (\Twig_Error_Loader $e) {
+								throw new TemplateNotFoundError($e->getMessage());
+							}
+							catch (\Twig_Error_Syntax $e) {
+								throw new TemplateSyntaxError($e->getMessage(), 0, $e);
+							}
+						}
+					}
+				}
+			}
+			else {
+				throw new TemplateManagerSetupError();
+			}
+		}
+		else {
+			throw new TemplateManagerSetupError();
+		}
 	}
 
 }
