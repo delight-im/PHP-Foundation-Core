@@ -719,6 +719,11 @@ class App {
 		return false;
 	}
 
+	/** Loads (i.e. lexes, parses and compiles) and caches all templates without evaluating them */
+	public function precompileTemplates() {
+		$this->getTemplateManager()->precompile();
+	}
+
 	private static function determineRootUrl() {
 		if (isset($_ENV['APP_PUBLIC_URL'])) {
 			$candidates = \explode('|', $_ENV['APP_PUBLIC_URL']);
