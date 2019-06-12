@@ -688,7 +688,7 @@ class App {
 	 *
 	 * @return bool
 	 */
-	function hasUploads() {
+	public function hasUploads() {
 		return !empty($_FILES);
 	}
 
@@ -698,7 +698,7 @@ class App {
 	 * @param string $name the name of the file upload, i.e. usually the name of the HTML input field
 	 * @return bool
 	 */
-	function hasUpload($name) {
+	public function hasUpload($name) {
 		// if information about the specified file upload is available
 		if (isset($_FILES[$name])) {
 			// if the file input had an array-style name
