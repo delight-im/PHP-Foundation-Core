@@ -72,7 +72,7 @@ class App {
 		$this->frameworkStoragePath = $frameworkStoragePath;
 
 		// configure the data source
-		$dataSource = new PdoDataSource($_ENV['DB_DRIVER']);
+		$dataSource = new PdoDataSource(!empty($_ENV['DB_DRIVER']) ? $_ENV['DB_DRIVER'] : '');
 		$dataSource->setHostname(!empty($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : null);
 		$dataSource->setPort(!empty($_ENV['DB_PORT']) ? $_ENV['DB_PORT'] : null);
 		$dataSource->setFilePath(!empty($_ENV['DB_FILE_PATH']) ? $_ENV['DB_FILE_PATH'] : null);
