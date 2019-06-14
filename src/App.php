@@ -763,6 +763,11 @@ class App {
 		$this->getTemplateManager()->precompile();
 	}
 
+	/** Deletes all compiled templates from the cache */
+	public function clearTemplateCache() {
+		$this->getTemplateManager()->clearCache();
+	}
+
 	private static function determineRootUrl() {
 		if (isset($_ENV['APP_PUBLIC_URL'])) {
 			$candidates = \explode('|', $_ENV['APP_PUBLIC_URL']);
