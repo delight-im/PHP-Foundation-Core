@@ -180,4 +180,34 @@ final class TemplateManager {
 		}
 	}
 
+	/** Deletes all compiled templates from the cache */
+	public function clearCache() {
+		if (isset($this->twig) && $this->twig instanceof \Twig_Environment) {
+			$cacheDir = $this->twig->getCache(true);
+
+			if (isset($cacheDir) && \is_string($cacheDir)) {
+				$cacheFiles = new \RecursiveIteratorIterator(
+					new \RecursiveDirectoryIterator($cacheDir),
+					\RecursiveIteratorIterator::LEAVES_ONLY
+				);
+
+				foreach ($cacheFiles as $cacheFile) {
+					if ($cacheFile->isFile()) {
+						$filename = $cacheFile->getFilename();
+
+						if (!empty($filename) && $filename[0] !== '.') {
+							@\unlink($cacheFile->getRealPath());
+						}
+					}
+				}
+			}
+			else {
+				throw new TemplateManagerSetupError();
+			}
+		}
+		else {
+			throw new TemplateManagerSetupError();
+		}
+	}
+
 }
