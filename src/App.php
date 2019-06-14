@@ -554,10 +554,10 @@ class App {
 	/**
 	 * Returns the client's IP address
 	 *
-	 * @return string the IP address
+	 * @return string|null the IP address, if available, or `null` otherwise
 	 */
 	public function getClientIp() {
-		return $_SERVER['REMOTE_ADDR'];
+		return !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
 	}
 
 	/**
