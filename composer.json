@@ -10,7 +10,7 @@
 		"delight-im/file-upload": "^1.2",
 		"delight-im/i18n": "^1.0",
 		"delight-im/ids": "^1.0",
-		"delight-im/router": "^3.1",
+		"delight-im/router": "^3.1.1",
 		"delight-im/str": "^2.4",
 		"filp/whoops": "^2.1",
 		"swiftmailer/swiftmailer": "^5.4",

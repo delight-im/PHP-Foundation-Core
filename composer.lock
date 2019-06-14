@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "77abde0a95033cabf62c840f4ddd158a",
+    "content-hash": "5b9de1df14facc78c45318679a0ecb8d",
     "packages": [
         {
             "name": "delight-im/auth",
@@ -339,16 +339,16 @@
         },
         {
             "name": "delight-im/router",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-Router.git",
-                "reference": "238ac8b540aba83ceebeb4b8e7f9bd11b48652ab"
+                "reference": "2dcb65715cfc69b4695f1a460317fc99d1d771d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-Router/zipball/238ac8b540aba83ceebeb4b8e7f9bd11b48652ab",
-                "reference": "238ac8b540aba83ceebeb4b8e7f9bd11b48652ab",
+                "url": "https://api.github.com/repos/delight-im/PHP-Router/zipball/2dcb65715cfc69b4695f1a460317fc99d1d771d2",
+                "reference": "2dcb65715cfc69b4695f1a460317fc99d1d771d2",
                 "shasum": ""
             },
             "require": {
@@ -372,7 +372,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2016-12-23T22:45:42+00:00"
+            "time": "2019-06-14T12:33:23+00:00"
         },
         {
             "name": "delight-im/str",
