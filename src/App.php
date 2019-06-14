@@ -581,6 +581,18 @@ class App {
 	}
 
 	/**
+	 * Returns whether an argument has been provided (at the specified position) via the command-line interface (CLI)
+	 *
+	 * @param int|null $position (optional) the position of the argument
+	 * @return bool
+	 */
+	public function hasCliArgument($position = null) {
+		$position = isset($position) && \is_numeric($position) ? (int) $position : 1;
+
+		return isset($_SERVER['argc']) && $_SERVER['argc'] > $position && isset($_SERVER['argv']) && isset($_SERVER['argv'][$position]);
+	}
+
+	/**
 	 * Redirects to the specified path below the root of this application
 	 *
 	 * @param string $targetPath the path below the root of this application, e.g. `/users`
