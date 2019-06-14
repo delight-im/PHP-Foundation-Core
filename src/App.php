@@ -561,6 +561,17 @@ class App {
 	}
 
 	/**
+	 * Returns whether the client's IP address is the address of the loopback interface
+	 *
+	 * @return bool
+	 */
+	public function isClientLoopback() {
+		$clientIp = $this->getClientIp();
+
+		return $clientIp === '127.0.0.1' || $clientIp === '::1';
+	}
+
+	/**
 	 * Redirects to the specified path below the root of this application
 	 *
 	 * @param string $targetPath the path below the root of this application, e.g. `/users`
