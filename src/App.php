@@ -593,6 +593,23 @@ class App {
 	}
 
 	/**
+	 * Returns the argument provided (at the specified position) via the command-line interface (CLI)
+	 *
+	 * @param int|null $position (optional) the position of the argument
+	 * @return mixed|null the argument, if available, or `null` otherwise
+	 */
+	public function getCliArgument($position = null) {
+		$position = isset($position) && \is_numeric($position) ? (int) $position : 1;
+
+		if (isset($_SERVER['argv']) && isset($_SERVER['argv'][$position])) {
+			return $_SERVER['argv'][$position];
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Redirects to the specified path below the root of this application
 	 *
 	 * @param string $targetPath the path below the root of this application, e.g. `/users`
