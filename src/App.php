@@ -572,6 +572,15 @@ class App {
 	}
 
 	/**
+	 * Returns whether the client is a command-line interface (CLI) as opposed to an HTTP client
+	 *
+	 * @return bool
+	 */
+	public function isClientCli() {
+		return \PHP_SAPI === 'cli' && !isset($_SERVER['REMOTE_ADDR']) && !isset($_SERVER['HTTP_HOST']);
+	}
+
+	/**
 	 * Redirects to the specified path below the root of this application
 	 *
 	 * @param string $targetPath the path below the root of this application, e.g. `/users`
