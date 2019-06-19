@@ -822,12 +822,14 @@ class App {
 			$candidates = \explode('|', $_ENV['APP_PUBLIC_URL']);
 			$rootUrl = \array_shift($candidates);
 
-			foreach ($candidates as $candidate) {
-				$candidateHost = \parse_url($candidate, \PHP_URL_HOST);
+			if (!empty($_SERVER['SERVER_NAME'])) {
+				foreach ($candidates as $candidate) {
+					$candidateHost = \parse_url($candidate, \PHP_URL_HOST);
 
-				if (\strcasecmp($candidateHost, $_SERVER['SERVER_NAME']) === 0) {
-					$rootUrl = $candidate;
-					break;
+					if (\strcasecmp($candidateHost, $_SERVER['SERVER_NAME']) === 0) {
+						$rootUrl = $candidate;
+						break;
+					}
 				}
 			}
 
