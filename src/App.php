@@ -478,10 +478,10 @@ class App {
 	/**
 	 * Returns the hostname of the server
 	 *
-	 * @return string the hostname
+	 * @return string|null the hostname, if available, or `null` otherwise
 	 */
 	public function getHost() {
-		return $_SERVER['SERVER_NAME'];
+		return !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
 	}
 
 	/**
