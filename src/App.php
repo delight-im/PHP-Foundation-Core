@@ -516,6 +516,24 @@ class App {
 	}
 
 	/**
+	 * Returns the public URL for the specified path below the root of this application with a query parameter indicating the current locale (if any)
+	 *
+	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
+	 * @return string the public URL for the requested path with a query parameter indicating the current locale (if any)
+	 */
+	public function urlWithLang($requestedPath) {
+		if (isset($this->i18n)) {
+			$locale = $this->i18n->getLocale();
+
+			if (!empty($locale)) {
+				return $this->urlWithParams($requestedPath, [ 'lang' => $locale ]);
+			}
+		}
+
+		return $this->url($requestedPath);
+	}
+
+	/**
 	 * Returns the public URL for the specified path below the root of this application with the supplied parameters in the query
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
