@@ -565,6 +565,23 @@ class App {
 	}
 
 	/**
+	 * Returns the URL of the current request with a query parameter indicating the current locale (if any)
+	 *
+	 * @return string the URL with a query parameter indicating the current locale (if any)
+	 */
+	public function currentUrlWithLang() {
+		if (isset($this->i18n)) {
+			$locale = $this->i18n->getLocale();
+
+			if (!empty($locale)) {
+				return $this->currentUrlWithParams([ 'lang' => $locale ]);
+			}
+		}
+
+		return $this->currentUrl();
+	}
+
+	/**
 	 * Returns the URL of the current request with the supplied parameters in the query
 	 *
 	 * @return string the URL with the supplied parameters in the query
