@@ -565,6 +565,18 @@ class App {
 	}
 
 	/**
+	 * Returns the URL of the current request with the supplied parameters in the query
+	 *
+	 * @return string the URL with the supplied parameters in the query
+	 */
+	public function currentUrlWithParams(array $params) {
+		return self::appendParamsToUrl(
+			$this->currentUrl(),
+			$params
+		);
+	}
+
+	/**
 	 * Returns the query string from the current request
 	 *
 	 * @return string the query string
