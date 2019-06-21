@@ -840,4 +840,30 @@ class App {
 		}
 	}
 
+	/**
+	 * Returns the given URL with the specified parameters appended to its query
+	 *
+	 * @param string $url
+	 * @param array $params
+	 * @return string
+	 */
+	private static function appendParamsToUrl($url, array $params) {
+		$queryAppendix = \http_build_query($params, '', '&', \PHP_QUERY_RFC3986);
+		$pathAndQuery = \explode('?', $url, 2);
+
+		if (isset($pathAndQuery[1])) {
+			$queryAndFragment = \explode('#', $pathAndQuery[1], 2);
+
+			if (isset($queryAndFragment[1])) {
+				return $pathAndQuery[0] . '?' . $queryAndFragment[0] . '&' . $queryAppendix . '#' . $queryAndFragment[1];
+			}
+			else {
+				return $pathAndQuery[0] . '?' . $queryAndFragment[0] . '&' . $queryAppendix;
+			}
+		}
+		else {
+			return $pathAndQuery[0] . '?' . $queryAppendix;
+		}
+	}
+
 }
