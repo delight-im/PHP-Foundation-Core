@@ -537,6 +537,7 @@ class App {
 	 * Returns the public URL for the specified path below the root of this application with the supplied parameters in the query
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
+	 * @param array $params the parameters to append to the query
 	 * @return string the public URL for the requested path with the supplied parameters in the query
 	 */
 	public function urlWithParams($requestedPath, array $params) {
@@ -584,6 +585,7 @@ class App {
 	/**
 	 * Returns the URL of the current request with the supplied parameters in the query
 	 *
+	 * @param array $params the parameters to append to the query
 	 * @return string the URL with the supplied parameters in the query
 	 */
 	public function currentUrlWithParams(array $params) {
