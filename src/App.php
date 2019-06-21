@@ -516,6 +516,19 @@ class App {
 	}
 
 	/**
+	 * Returns the public URL for the specified path below the root of this application with the supplied parameters in the query
+	 *
+	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
+	 * @return string the public URL for the requested path with the supplied parameters in the query
+	 */
+	public function urlWithParams($requestedPath, array $params) {
+		return self::appendParamsToUrl(
+			$this->url($requestedPath),
+			$params
+		);
+	}
+
+	/**
 	 * Returns the route of the current request
 	 *
 	 * @return string the route
