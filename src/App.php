@@ -127,7 +127,7 @@ class App {
 	 * Returns the path to the specified file or folder inside the private storage of this application
 	 *
 	 * @param string $requestedPath a file or folder inside the private storage of this application, e.g. `/secret/keys.txt` or `/tmp/42.png`
-	 * @return string the path to the file or folder inside the private storage
+	 * @return string
 	 */
 	public function getStoragePath($requestedPath) {
 		$requestedPath = trim($requestedPath);
@@ -139,7 +139,7 @@ class App {
 	/**
 	 * Returns the database instance
 	 *
-	 * @return PdoDatabase the database instance
+	 * @return PdoDatabase
 	 */
 	public function db() {
 		return $this->db;
@@ -148,7 +148,7 @@ class App {
 	/**
 	 * Returns the input helper for validation and filtering
 	 *
-	 * @return Input the input helper
+	 * @return Input
 	 */
 	public function input() {
 		// if the component has not been created yet
@@ -178,7 +178,7 @@ class App {
 	/**
 	 * Returns the template manager that can be used to add globals or filters
 	 *
-	 * @return TemplateManager the template manager
+	 * @return TemplateManager
 	 */
 	public function getTemplateManager() {
 		// if the component has not been created yet
@@ -208,7 +208,7 @@ class App {
 	/**
 	 * Returns the mailing component
 	 *
-	 * @return \Swift_Mailer the mailing component
+	 * @return \Swift_Mailer
 	 */
 	public function mail() {
 		// if the instance has not been created yet
@@ -255,7 +255,7 @@ class App {
 	/**
 	 * Returns the authentication component
 	 *
-	 * @return Auth the authentication component
+	 * @return Auth
 	 */
 	public function auth() {
 		return $this->auth;
@@ -264,7 +264,7 @@ class App {
 	/**
 	 * Returns the internationalization component
 	 *
-	 * @return I18n the internationalization component
+	 * @return I18n
 	 */
 	public function i18n() {
 		if (!isset($this->i18n)) {
@@ -277,7 +277,7 @@ class App {
 	/**
 	 * Returns the component that can be used to encode and decode IDs conveniently for obfuscation
 	 *
-	 * @return Id the ID encoder and decoder
+	 * @return Id
 	 */
 	public function ids() {
 		// if the component has not been created yet
@@ -298,7 +298,7 @@ class App {
 	/**
 	 * Returns the component that can be used to manage flash messages
 	 *
-	 * @return Flash the flash message handler
+	 * @return Flash
 	 */
 	public function flash() {
 		// if the component has not been created yet
@@ -315,7 +315,7 @@ class App {
 	 * Returns a new helper for convenient file uploads
 	 *
 	 * @param string $targetDirectory (optional) the target directory within the `storage` folder
-	 * @return FileUpload the helper instance
+	 * @return FileUpload
 	 */
 	public function upload($targetDirectory = null) {
 		$helper = new FileUpload();
@@ -426,7 +426,7 @@ class App {
 	/**
 	 * Detects whether the current request has been sent over plain HTTP (as opposed to secure HTTPS)
 	 *
-	 * @return bool whether the current request is a HTTP request
+	 * @return bool
 	 */
 	public function isHttp() {
 		return empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off';
@@ -435,7 +435,7 @@ class App {
 	/**
 	 * Detects whether the current request has been sent over secure HTTPS (as opposed to plain HTTP)
 	 *
-	 * @return bool whether the current request is a HTTP request
+	 * @return bool
 	 */
 	public function isHttps() {
 		return !$this->isHttp();
@@ -454,7 +454,7 @@ class App {
 	 * Returns the protocol from the current request
 	 *
 	 * @param bool $lowerCase whether to return the protocol name in lower case or upper case
-	 * @return string the protocol name
+	 * @return string
 	 */
 	public function getProtocol($lowerCase = false) {
 		if ($this->isHttp()) {
@@ -478,7 +478,7 @@ class App {
 	/**
 	 * Returns the hostname of the server
 	 *
-	 * @return string|null the hostname, if available, or `null` otherwise
+	 * @return string|null
 	 */
 	public function getHost() {
 		return !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
@@ -496,7 +496,7 @@ class App {
 	/**
 	 * Returns the port of the server used for the current request
 	 *
-	 * @return int the port number
+	 * @return int
 	 */
 	public function getPort() {
 		return (int) $_SERVER['SERVER_PORT'];
@@ -506,7 +506,7 @@ class App {
 	 * Returns the public URL for the specified path below the root of this application
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
-	 * @return string the public URL for the requested path
+	 * @return string
 	 */
 	public function url($requestedPath) {
 		$requestedPath = trim($requestedPath);
@@ -519,7 +519,7 @@ class App {
 	 * Returns the public URL for the specified path below the root of this application with a query parameter indicating the current locale (if any)
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
-	 * @return string the public URL for the requested path with a query parameter indicating the current locale (if any)
+	 * @return string
 	 */
 	public function urlWithLang($requestedPath) {
 		if (isset($this->i18n)) {
@@ -538,7 +538,7 @@ class App {
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
 	 * @param array $params the parameters to append to the query
-	 * @return string the public URL for the requested path with the supplied parameters in the query
+	 * @return string
 	 */
 	public function urlWithParams($requestedPath, array $params) {
 		return self::appendParamsToUrl(
@@ -550,7 +550,7 @@ class App {
 	/**
 	 * Returns the route of the current request
 	 *
-	 * @return string the route
+	 * @return string
 	 */
 	public function currentRoute() {
 		return substr($this->router->getRoute(), strlen($this->router->getRootPath()));
@@ -559,7 +559,7 @@ class App {
 	/**
 	 * Returns the URL of the current request
 	 *
-	 * @return string the URL
+	 * @return string
 	 */
 	public function currentUrl() {
 		return $this->rootUrl . $this->currentRoute();
@@ -568,7 +568,7 @@ class App {
 	/**
 	 * Returns the URL of the current request with a query parameter indicating the current locale (if any)
 	 *
-	 * @return string the URL with a query parameter indicating the current locale (if any)
+	 * @return string
 	 */
 	public function currentUrlWithLang() {
 		if (isset($this->i18n)) {
@@ -586,7 +586,7 @@ class App {
 	 * Returns the URL of the current request with the supplied parameters in the query
 	 *
 	 * @param array $params the parameters to append to the query
-	 * @return string the URL with the supplied parameters in the query
+	 * @return string
 	 */
 	public function currentUrlWithParams(array $params) {
 		return self::appendParamsToUrl(
@@ -598,7 +598,7 @@ class App {
 	/**
 	 * Returns the query string from the current request
 	 *
-	 * @return string the query string
+	 * @return string
 	 */
 	public function getQueryString() {
 		return $_SERVER['QUERY_STRING'];
@@ -607,7 +607,7 @@ class App {
 	/**
 	 * Returns the request method from the current request
 	 *
-	 * @return string the request method
+	 * @return string
 	 */
 	public function getRequestMethod() {
 		return $this->router->getRequestMethod();
@@ -616,7 +616,7 @@ class App {
 	/**
 	 * Returns the client's IP address
 	 *
-	 * @return string|null the IP address, if available, or `null` otherwise
+	 * @return string|null
 	 */
 	public function getClientIp() {
 		return !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
@@ -658,7 +658,7 @@ class App {
 	 * Returns the argument provided (at the specified position) via the command-line interface (CLI)
 	 *
 	 * @param int|null $position (optional) the position of the argument
-	 * @return mixed|null the argument, if available, or `null` otherwise
+	 * @return mixed|null
 	 */
 	public function getCliArgument($position = null) {
 		$position = isset($position) && \is_numeric($position) ? (int) $position : 1;
