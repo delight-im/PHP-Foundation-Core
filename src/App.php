@@ -516,7 +516,7 @@ class App {
 	}
 
 	/**
-	 * Returns the public URL for the specified path below the root of this application with a query parameter indicating the current locale (if any)
+	 * Returns the public URL for the specified path below the root of this application with a query parameter indicating the current locale
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
 	 * @return string
@@ -566,7 +566,7 @@ class App {
 	}
 
 	/**
-	 * Returns the URL of the current request with a query parameter indicating the current locale (if any)
+	 * Returns the URL of the current request with a query parameter indicating the current locale
 	 *
 	 * @return string
 	 */
