@@ -612,6 +612,30 @@ class App {
 	}
 
 	/**
+	 * Returns the URL of the current request along with its query string and the supplied additional parameters in the query
+	 *
+	 * @param array $params the parameters to append to the query
+	 * @return string
+	 */
+	public function currentUrlWithQueryAndParams(array $params) {
+		if (!empty($_SERVER['QUERY_STRING'])) {
+			\parse_str($_SERVER['QUERY_STRING'], $existingAndNewParams);
+		}
+		else {
+			$existingAndNewParams = [];
+		}
+
+		foreach ($params as $key => $value) {
+			$existingAndNewParams[$key] = $value;
+		}
+
+		return self::appendParamsToUrl(
+			$this->currentUrl(),
+			$existingAndNewParams
+		);
+	}
+
+	/**
 	 * Returns the query string from the current request
 	 *
 	 * @return string|null
