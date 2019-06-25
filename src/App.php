@@ -598,10 +598,10 @@ class App {
 	/**
 	 * Returns the query string from the current request
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getQueryString() {
-		return $_SERVER['QUERY_STRING'];
+		return !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : null;
 	}
 
 	/**
