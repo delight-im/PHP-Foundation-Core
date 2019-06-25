@@ -496,10 +496,10 @@ class App {
 	/**
 	 * Returns the port of the server used for the current request
 	 *
-	 * @return int
+	 * @return int|null
 	 */
 	public function getPort() {
-		return (int) $_SERVER['SERVER_PORT'];
+		return !empty($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : null;
 	}
 
 	/**
