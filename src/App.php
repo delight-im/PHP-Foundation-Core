@@ -596,6 +596,22 @@ class App {
 	}
 
 	/**
+	 * Returns the URL of the current request along with its query string
+	 *
+	 * @return string
+	 */
+	public function currentUrlWithQuery() {
+		$url = $this->currentUrl();
+
+		if (!empty($_SERVER['QUERY_STRING'])) {
+			$url .= '?';
+			$url .= (string) $_SERVER['QUERY_STRING'];
+		}
+
+		return $url;
+	}
+
+	/**
 	 * Returns the query string from the current request
 	 *
 	 * @return string|null
