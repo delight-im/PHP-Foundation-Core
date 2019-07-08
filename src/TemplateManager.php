@@ -145,14 +145,17 @@ final class TemplateManager {
 						new \RecursiveDirectoryIterator($templateDir),
 						\RecursiveIteratorIterator::LEAVES_ONLY
 					);
+					$templateDir = \realpath($templateDir);
 
 					foreach ($templates as $template) {
 						if ($template->isFile()) {
-							$templateName = (string) $template;
+							$templateName = $template->getRealPath();
 
 							if (\strpos($templateName, $templateDir) === 0) {
 								$templateName = \substr($templateName, \strlen($templateDir));
 							}
+
+							// alternative: $templateName = $templates->getSubPathName();
 
 							try {
 								$this->twig->loadTemplate($templateName);
