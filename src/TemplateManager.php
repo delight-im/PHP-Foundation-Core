@@ -148,11 +148,10 @@ final class TemplateManager {
 
 					foreach ($templates as $template) {
 						if ($template->isFile()) {
-							if (\strpos($template, $templateDir) === 0) {
-								$templateName = \substr($template, \strlen($templateDir));
-							}
-							else {
-								$templateName = (string) $template;
+							$templateName = (string) $template;
+
+							if (\strpos($templateName, $templateDir) === 0) {
+								$templateName = \substr($templateName, \strlen($templateDir));
 							}
 
 							try {
