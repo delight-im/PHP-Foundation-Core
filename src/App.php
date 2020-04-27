@@ -762,6 +762,18 @@ class App {
 	}
 
 	/**
+	 * Redirects to the specified (external) URL
+	 *
+	 * @param string $targetUrl the (external) URL, e.g. `http://m.example.com/some/path`
+	 */
+	public function redirectToUrl($targetUrl) {
+		// send the appropriate HTTP header causing the redirect
+		\header('Location: ' . $targetUrl);
+		// end execution because that HTTP header is all we need
+		exit;
+	}
+
+	/**
 	 * Adds a new route for the HTTP request method `GET` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
