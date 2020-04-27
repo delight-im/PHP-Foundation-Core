@@ -755,10 +755,7 @@ class App {
 	 * @param string $targetPath the path below the root of this application, e.g. `/users`
 	 */
 	public function redirect($targetPath) {
-		// send the appropriate HTTP header causing the redirect
-		\header('Location: ' . $this->url($targetPath));
-		// end execution because that HTTP header is all we need
-		exit;
+		$this->redirectToUrl($this->url($targetPath));
 	}
 
 	/**
