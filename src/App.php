@@ -24,6 +24,8 @@ class App {
 
 	/** @var string the root URL as whitelisted in the configuration */
 	private $canonicalRootUrl;
+	/** @var string the primary root URL as whitelisted in the configuration */
+	private $primaryRootUrl;
 	/** @var string|null the host as whitelisted in the configuration */
 	private $canonicalHost;
 	/** @var Router */
@@ -59,6 +61,7 @@ class App {
 	public function __construct($appStoragePath, $templatesPath, $frameworkStoragePath) {
 		// get the root URL as whitelisted in the configuration
 		$this->canonicalRootUrl = self::determineCanonicalRootUrl(false);
+		$this->primaryRootUrl = self::determineCanonicalRootUrl(true);
 
 		if (!empty($this->canonicalRootUrl)) {
 			$this->canonicalHost = \parse_url($this->canonicalRootUrl, \PHP_URL_HOST);
