@@ -65,7 +65,7 @@ class App {
 		}
 
 		// detect the root path for the router from the root URL
-		$canonicalRootPath = urldecode(parse_url($this->canonicalRootUrl, PHP_URL_PATH));
+		$canonicalRootPath = \urldecode(\parse_url($this->canonicalRootUrl, \PHP_URL_PATH));
 
 		// get a router instance for the detected root path
 		$this->router = new Router($canonicalRootPath);
@@ -130,8 +130,8 @@ class App {
 	 * @return string
 	 */
 	public function getStoragePath($requestedPath) {
-		$requestedPath = trim($requestedPath);
-		$requestedPath = '/' . ltrim($requestedPath, '/');
+		$requestedPath = \trim($requestedPath);
+		$requestedPath = '/' . \ltrim($requestedPath, '/');
 
 		return $this->appStoragePath . $requestedPath;
 	}
@@ -230,7 +230,7 @@ class App {
 					}
 				}
 				elseif ($_ENV['MAIL_TRANSPORT'] === 'sendmail') {
-					$sendmailPath = ini_get('sendmail_path');
+					$sendmailPath = \ini_get('sendmail_path');
 
 					if (empty($sendmailPath)) {
 						$sendmailPath = '/usr/sbin/sendmail';
@@ -333,7 +333,7 @@ class App {
 	 * @param int $code the HTTP status code, e.g. `200`, `404` or `401`
 	 */
 	public function setStatus($code) {
-		http_response_code($code);
+		\http_response_code($code);
 	}
 
 	/**
@@ -351,7 +351,7 @@ class App {
 		}
 
 		// send the appropriate response headers for the download
-		self::sendDownloadHeaders($mimeType, $suggestedFilename, strlen($content));
+		self::sendDownloadHeaders($mimeType, $suggestedFilename, \strlen($content));
 
 		// send the actual content
 		echo $content;
@@ -374,14 +374,14 @@ class App {
 			}
 
 			// send the appropriate response headers for the download
-			self::sendDownloadHeaders($mimeType, $suggestedFilename, filesize($filePath));
+			self::sendDownloadHeaders($mimeType, $suggestedFilename, \filesize($filePath));
 
 			// pipe the actual file contents through PHP
-			readfile($filePath);
+			\readfile($filePath);
 		}
 		// if the file could not be found
 		else {
-			throw new \RuntimeException('File `'.$filePath.'` not found');
+			throw new \RuntimeException('File `' . $filePath . '` not found');
 		}
 	}
 
@@ -393,12 +393,12 @@ class App {
 	 * @param int $size the size of the download in bytes
 	 */
 	private static function sendDownloadHeaders($mimeType, $suggestedFilename, $size) {
-		header('Content-Type: '.$mimeType, true);
-		header('Content-Disposition: attachment; filename="'.$suggestedFilename.'"', true);
-		header('Content-Length: '.$size, true);
-		header('Accept-Ranges: none', true);
-		header('Cache-Control: no-cache', true);
-		header('Connection: close', true);
+		\header('Content-Type: ' . $mimeType, true);
+		\header('Content-Disposition: attachment; filename="' . $suggestedFilename . '"', true);
+		\header('Content-Length: ' . $size, true);
+		\header('Accept-Ranges: none', true);
+		\header('Cache-Control: no-cache', true);
+		\header('Connection: close', true);
 	}
 
 	/**
@@ -509,8 +509,8 @@ class App {
 	 * @return string
 	 */
 	public function url($requestedPath) {
-		$requestedPath = trim($requestedPath);
-		$requestedPath = '/' . ltrim($requestedPath, '/');
+		$requestedPath = \trim($requestedPath);
+		$requestedPath = '/' . \ltrim($requestedPath, '/');
 
 		return $this->canonicalRootUrl . $requestedPath;
 	}
@@ -553,7 +553,7 @@ class App {
 	 * @return string
 	 */
 	public function currentRoute() {
-		return substr($this->router->getRoute(), strlen($this->router->getRootPath()));
+		return \substr($this->router->getRoute(), \strlen($this->router->getRootPath()));
 	}
 
 	/**
@@ -753,7 +753,7 @@ class App {
 	 */
 	public function redirect($targetPath) {
 		// send the appropriate HTTP header causing the redirect
-		header('Location: '.$this->url($targetPath));
+		\header('Location: ' . $this->url($targetPath));
 		// end execution because that HTTP header is all we need
 		exit;
 	}
@@ -890,7 +890,7 @@ class App {
 			// if the internal character encoding has been configured
 			if (isset($_ENV['APP_CHARSET'])) {
 				// use the encoding from the configuration
-				$charset = strtolower($_ENV['APP_CHARSET']);
+				$charset = \strtolower($_ENV['APP_CHARSET']);
 			}
 			// if there is no encoding in the configuration
 			else {
