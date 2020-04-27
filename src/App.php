@@ -28,6 +28,8 @@ class App {
 	private $primaryRootUrl;
 	/** @var string|null the host as whitelisted in the configuration */
 	private $canonicalHost;
+	/** @var string|null the primary host as whitelisted in the configuration */
+	private $primaryHost;
 	/** @var Router */
 	private $router;
 	/** @var string the path to the directory for private storage in this application */
@@ -65,6 +67,10 @@ class App {
 
 		if (!empty($this->canonicalRootUrl)) {
 			$this->canonicalHost = \parse_url($this->canonicalRootUrl, \PHP_URL_HOST);
+		}
+
+		if (!empty($this->primaryRootUrl)) {
+			$this->primaryHost = \parse_url($this->primaryRootUrl, \PHP_URL_HOST);
 		}
 
 		// detect the root path for the router from the root URL
