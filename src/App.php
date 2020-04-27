@@ -65,10 +65,10 @@ class App {
 		}
 
 		// detect the root path for the router from the root URL
-		$rootPath = urldecode(parse_url($this->canonicalRootUrl, PHP_URL_PATH));
+		$canonicalRootPath = urldecode(parse_url($this->canonicalRootUrl, PHP_URL_PATH));
 
 		// get a router instance for the detected root path
-		$this->router = new Router($rootPath);
+		$this->router = new Router($canonicalRootPath);
 
 		// remember some relevant paths on the file system
 		$this->appStoragePath = $appStoragePath;
