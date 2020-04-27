@@ -506,28 +506,30 @@ class App {
 	 * Returns the public URL for the specified path below the root of this application
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function url($requestedPath) {
-		return $this->canonicalRootUrl . self::normalizePath($requestedPath);
+	public function url($requestedPath, $primary = null) {
+		return ($primary ? $this->primaryRootUrl : $this->canonicalRootUrl) . self::normalizePath($requestedPath);
 	}
 
 	/**
 	 * Returns the public URL for the specified path below the root of this application with a query parameter indicating the current locale
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function urlWithLang($requestedPath) {
+	public function urlWithLang($requestedPath, $primary = null) {
 		if (isset($this->i18n)) {
 			$locale = $this->i18n->getLocale();
 
 			if (!empty($locale)) {
-				return $this->urlWithParams($requestedPath, [ 'lang' => $locale ]);
+				return $this->urlWithParams($requestedPath, [ 'lang' => $locale ], $primary);
 			}
 		}
 
-		return $this->url($requestedPath);
+		return $this->url($requestedPath, $primary);
 	}
 
 	/**
@@ -535,11 +537,12 @@ class App {
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
 	 * @param array $params the parameters to append to the query
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function urlWithParams($requestedPath, array $params) {
+	public function urlWithParams($requestedPath, array $params, $primary = null) {
 		return self::appendParamsToUrl(
-			$this->url($requestedPath),
+			$this->url($requestedPath, $primary),
 			$params
 		);
 	}
