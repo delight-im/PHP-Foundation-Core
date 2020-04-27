@@ -493,10 +493,11 @@ class App {
 	/**
 	 * Returns the host as whitelisted in the configuration
 	 *
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical host
 	 * @return string|null
 	 */
-	public function getCanonicalHost() {
-		return $this->canonicalHost;
+	public function getCanonicalHost($primary = null) {
+		return $primary ? $this->primaryHost : $this->canonicalHost;
 	}
 
 	/**
