@@ -559,38 +559,41 @@ class App {
 	/**
 	 * Returns the URL of the current request
 	 *
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function currentUrl() {
-		return $this->canonicalRootUrl . $this->currentRoute();
+	public function currentUrl($primary = null) {
+		return ($primary ? $this->primaryRootUrl : $this->canonicalRootUrl) . $this->currentRoute();
 	}
 
 	/**
 	 * Returns the URL of the current request with a query parameter indicating the current locale
 	 *
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function currentUrlWithLang() {
+	public function currentUrlWithLang($primary = null) {
 		if (isset($this->i18n)) {
 			$locale = $this->i18n->getLocale();
 
 			if (!empty($locale)) {
-				return $this->currentUrlWithParams([ 'lang' => $locale ]);
+				return $this->currentUrlWithParams([ 'lang' => $locale ], $primary);
 			}
 		}
 
-		return $this->currentUrl();
+		return $this->currentUrl($primary);
 	}
 
 	/**
 	 * Returns the URL of the current request with the supplied parameters in the query
 	 *
 	 * @param array $params the parameters to append to the query
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function currentUrlWithParams(array $params) {
+	public function currentUrlWithParams(array $params, $primary = null) {
 		return self::appendParamsToUrl(
-			$this->currentUrl(),
+			$this->currentUrl($primary),
 			$params
 		);
 	}
@@ -598,10 +601,11 @@ class App {
 	/**
 	 * Returns the URL of the current request along with its query string
 	 *
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function currentUrlWithQuery() {
-		$url = $this->currentUrl();
+	public function currentUrlWithQuery($primary = null) {
+		$url = $this->currentUrl($primary);
 
 		if (!empty($_SERVER['QUERY_STRING'])) {
 			$url .= '?';
@@ -614,27 +618,29 @@ class App {
 	/**
 	 * Returns the URL of the current request along with its query string and an additional query parameter indicating the current locale
 	 *
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function currentUrlWithQueryAndLang() {
+	public function currentUrlWithQueryAndLang($primary = null) {
 		if (isset($this->i18n)) {
 			$locale = $this->i18n->getLocale();
 
 			if (!empty($locale)) {
-				return $this->currentUrlWithQueryAndParams([ 'lang' => $locale ]);
+				return $this->currentUrlWithQueryAndParams([ 'lang' => $locale ], $primary);
 			}
 		}
 
-		return $this->currentUrlWithQuery();
+		return $this->currentUrlWithQuery($primary);
 	}
 
 	/**
 	 * Returns the URL of the current request along with its query string and the supplied additional parameters in the query
 	 *
 	 * @param array $params the parameters to append to the query
+	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
-	public function currentUrlWithQueryAndParams(array $params) {
+	public function currentUrlWithQueryAndParams(array $params, $primary = null) {
 		if (!empty($_SERVER['QUERY_STRING'])) {
 			\parse_str($_SERVER['QUERY_STRING'], $existingAndNewParams);
 		}
@@ -647,7 +653,7 @@ class App {
 		}
 
 		return self::appendParamsToUrl(
-			$this->currentUrl(),
+			$this->currentUrl($primary),
 			$existingAndNewParams
 		);
 	}
