@@ -23,7 +23,7 @@ class App {
 	const TEMPLATES_CACHE_SUBFOLDER = '/views/cache';
 
 	/** @var string the root URL as whitelisted in the configuration */
-	private $rootUrl;
+	private $canonicalRootUrl;
 	/** @var string|null the host as whitelisted in the configuration */
 	private $canonicalHost;
 	/** @var Router */
@@ -58,14 +58,14 @@ class App {
 	 */
 	public function __construct($appStoragePath, $templatesPath, $frameworkStoragePath) {
 		// get the root URL as whitelisted in the configuration
-		$this->rootUrl = self::determineRootUrl();
+		$this->canonicalRootUrl = self::determineCanonicalRootUrl();
 
-		if (!empty($this->rootUrl)) {
-			$this->canonicalHost = \parse_url($this->rootUrl, \PHP_URL_HOST);
+		if (!empty($this->canonicalRootUrl)) {
+			$this->canonicalHost = \parse_url($this->canonicalRootUrl, \PHP_URL_HOST);
 		}
 
 		// detect the root path for the router from the root URL
-		$rootPath = urldecode(parse_url($this->rootUrl, PHP_URL_PATH));
+		$rootPath = urldecode(parse_url($this->canonicalRootUrl, PHP_URL_PATH));
 
 		// get a router instance for the detected root path
 		$this->router = new Router($rootPath);
@@ -512,7 +512,7 @@ class App {
 		$requestedPath = trim($requestedPath);
 		$requestedPath = '/' . ltrim($requestedPath, '/');
 
-		return $this->rootUrl . $requestedPath;
+		return $this->canonicalRootUrl . $requestedPath;
 	}
 
 	/**
@@ -562,7 +562,7 @@ class App {
 	 * @return string
 	 */
 	public function currentUrl() {
-		return $this->rootUrl . $this->currentRoute();
+		return $this->canonicalRootUrl . $this->currentRoute();
 	}
 
 	/**
@@ -954,23 +954,23 @@ class App {
 		$this->getTemplateManager()->clearCache();
 	}
 
-	private static function determineRootUrl() {
+	private static function determineCanonicalRootUrl() {
 		if (isset($_ENV['APP_PUBLIC_URL'])) {
 			$candidates = \explode('|', $_ENV['APP_PUBLIC_URL']);
-			$rootUrl = \array_shift($candidates);
+			$best = \array_shift($candidates);
 
 			if (!empty($_SERVER['SERVER_NAME'])) {
 				foreach ($candidates as $candidate) {
 					$candidateHost = \parse_url($candidate, \PHP_URL_HOST);
 
 					if (\strcasecmp($candidateHost, $_SERVER['SERVER_NAME']) === 0) {
-						$rootUrl = $candidate;
+						$best = $candidate;
 						break;
 					}
 				}
 			}
 
-			return \rtrim($rootUrl, '/');
+			return \rtrim($best, '/');
 		}
 		else {
 			return '';
