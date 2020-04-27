@@ -671,6 +671,15 @@ class App {
 	}
 
 	/**
+	 * Returns the URL of the referring page (or site) for the current request
+	 *
+	 * @return string
+	 */
+	public function getReferrer() {
+		return !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+	}
+
+	/**
 	 * Returns the client's IP address
 	 *
 	 * @return string|null
