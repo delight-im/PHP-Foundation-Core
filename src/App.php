@@ -58,7 +58,7 @@ class App {
 	 */
 	public function __construct($appStoragePath, $templatesPath, $frameworkStoragePath) {
 		// get the root URL as whitelisted in the configuration
-		$this->canonicalRootUrl = self::determineCanonicalRootUrl();
+		$this->canonicalRootUrl = self::determineCanonicalRootUrl(false);
 
 		if (!empty($this->canonicalRootUrl)) {
 			$this->canonicalHost = \parse_url($this->canonicalRootUrl, \PHP_URL_HOST);
@@ -954,12 +954,12 @@ class App {
 		$this->getTemplateManager()->clearCache();
 	}
 
-	private static function determineCanonicalRootUrl() {
+	private static function determineCanonicalRootUrl($primary) {
 		if (isset($_ENV['APP_PUBLIC_URL'])) {
 			$candidates = \explode('|', $_ENV['APP_PUBLIC_URL']);
 			$best = \array_shift($candidates);
 
-			if (!empty($_SERVER['SERVER_NAME'])) {
+			if (!$primary && !empty($_SERVER['SERVER_NAME'])) {
 				foreach ($candidates as $candidate) {
 					$candidateHost = \parse_url($candidate, \PHP_URL_HOST);
 
