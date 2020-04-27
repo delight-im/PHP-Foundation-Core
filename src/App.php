@@ -133,10 +133,7 @@ class App {
 	 * @return string
 	 */
 	public function getStoragePath($requestedPath) {
-		$requestedPath = \trim($requestedPath);
-		$requestedPath = '/' . \ltrim($requestedPath, '/');
-
-		return $this->appStoragePath . $requestedPath;
+		return $this->appStoragePath . self::normalizePath($requestedPath);
 	}
 
 	/**
@@ -512,10 +509,7 @@ class App {
 	 * @return string
 	 */
 	public function url($requestedPath) {
-		$requestedPath = \trim($requestedPath);
-		$requestedPath = '/' . \ltrim($requestedPath, '/');
-
-		return $this->canonicalRootUrl . $requestedPath;
+		return $this->canonicalRootUrl . self::normalizePath($requestedPath);
 	}
 
 	/**
@@ -987,6 +981,19 @@ class App {
 		else {
 			return '';
 		}
+	}
+
+	/**
+	 * Normalizes the specified path
+	 *
+	 * @param string $path the path, e.g. `/settings`
+	 * @return string
+	 */
+	private static function normalizePath($path) {
+		$path = \trim($path);
+		$path = '/' . \ltrim($path, '/');
+
+		return $path;
 	}
 
 	/**
