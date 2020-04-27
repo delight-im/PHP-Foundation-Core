@@ -689,6 +689,15 @@ class App {
 	}
 
 	/**
+	 * Returns the user-agent string from the current request, which helps identify the client software (i.e. usually a web browser)
+	 *
+	 * @return string
+	 */
+	public function getUa() {
+		return !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+	}
+
+	/**
 	 * Returns whether the client's IP address is the address of the loopback interface
 	 *
 	 * @return bool
