@@ -760,7 +760,7 @@ class App {
 	}
 
 	/**
-	 * Redirects to the specified path below the root of this application
+	 * Redirects to the specified path below the root of this application and ends execution of the current script
 	 *
 	 * @param string $targetPath the path below the root of this application, e.g. `/users`
 	 */
@@ -769,7 +769,7 @@ class App {
 	}
 
 	/**
-	 * Redirects to the specified (external) URL
+	 * Redirects to the specified (external) URL and ends execution of the current script
 	 *
 	 * @param string $targetUrl the (external) URL, e.g. `http://m.example.com/some/path`
 	 */
