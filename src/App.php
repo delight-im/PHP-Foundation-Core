@@ -686,7 +686,7 @@ class App {
 	/**
 	 * Returns the URL of the referring page (or site) for the current request
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getReferrer() {
 		return !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
@@ -704,7 +704,7 @@ class App {
 	/**
 	 * Returns the user-agent string from the current request, which helps identify the client software (i.e. usually a web browser)
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getUa() {
 		return !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
