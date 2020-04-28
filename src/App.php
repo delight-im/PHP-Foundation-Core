@@ -22,10 +22,8 @@ class App {
 
 	const TEMPLATES_CACHE_SUBFOLDER = '/views/cache';
 
-	/** @var string the root URL as whitelisted in the configuration */
+	/** @var string[] the matching (index zero) and the primary (index one) root URL as whitelisted in the configuration */
 	private $canonicalRootUrl;
-	/** @var string the primary root URL as whitelisted in the configuration */
-	private $primaryRootUrl;
 	/** @var string|null the host as whitelisted in the configuration */
 	private $canonicalHost;
 	/** @var string|null the primary host as whitelisted in the configuration */
@@ -62,19 +60,23 @@ class App {
 	 */
 	public function __construct($appStoragePath, $templatesPath, $frameworkStoragePath) {
 		// get the root URL as whitelisted in the configuration
-		$this->canonicalRootUrl = self::determineCanonicalRootUrl(false);
-		$this->primaryRootUrl = self::determineCanonicalRootUrl(true);
+		$this->canonicalRootUrl = [
+			// the matching root URL
+			self::determineCanonicalRootUrl(false),
+			// the primary root URL
+			self::determineCanonicalRootUrl(true)
+		];
 
-		if (!empty($this->canonicalRootUrl)) {
-			$this->canonicalHost = \parse_url($this->canonicalRootUrl, \PHP_URL_HOST);
+		if (!empty($this->canonicalRootUrl[0])) {
+			$this->canonicalHost = \parse_url($this->canonicalRootUrl[0], \PHP_URL_HOST);
 		}
 
-		if (!empty($this->primaryRootUrl)) {
-			$this->primaryHost = \parse_url($this->primaryRootUrl, \PHP_URL_HOST);
+		if (!empty($this->canonicalRootUrl[1])) {
+			$this->primaryHost = \parse_url($this->canonicalRootUrl[1], \PHP_URL_HOST);
 		}
 
 		// detect the root path for the router from the root URL
-		$canonicalRootPath = \urldecode(\parse_url($this->canonicalRootUrl, \PHP_URL_PATH));
+		$canonicalRootPath = \urldecode(\parse_url($this->canonicalRootUrl[0], \PHP_URL_PATH));
 
 		// get a router instance for the detected root path
 		$this->router = new Router($canonicalRootPath);
@@ -517,7 +519,7 @@ class App {
 	 * @return string
 	 */
 	public function url($requestedPath, $primary = null) {
-		return ($primary ? $this->primaryRootUrl : $this->canonicalRootUrl) . self::normalizePath($requestedPath);
+		return $this->canonicalRootUrl[$primary ? 1 : 0] . self::normalizePath($requestedPath);
 	}
 
 	/**
@@ -570,7 +572,7 @@ class App {
 	 * @return string
 	 */
 	public function currentUrl($primary = null) {
-		return ($primary ? $this->primaryRootUrl : $this->canonicalRootUrl) . $this->currentRoute();
+		return $this->canonicalRootUrl[$primary ? 1 : 0] . $this->currentRoute();
 	}
 
 	/**
