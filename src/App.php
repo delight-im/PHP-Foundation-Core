@@ -24,10 +24,8 @@ class App {
 
 	/** @var string[] the matching (index zero) and the primary (index one) root URL as whitelisted in the configuration */
 	private $canonicalRootUrl;
-	/** @var string|null the host as whitelisted in the configuration */
+	/** @var string[]|null[] the matching (index zero) and the primary (index one) host as whitelisted in the configuration */
 	private $canonicalHost;
-	/** @var string|null the primary host as whitelisted in the configuration */
-	private $primaryHost;
 	/** @var Router */
 	private $router;
 	/** @var string the path to the directory for private storage in this application */
@@ -67,13 +65,13 @@ class App {
 			self::determineCanonicalRootUrl(true)
 		];
 
-		if (!empty($this->canonicalRootUrl[0])) {
-			$this->canonicalHost = \parse_url($this->canonicalRootUrl[0], \PHP_URL_HOST);
-		}
-
-		if (!empty($this->canonicalRootUrl[1])) {
-			$this->primaryHost = \parse_url($this->canonicalRootUrl[1], \PHP_URL_HOST);
-		}
+		// get the host as whitelisted in the configuration (if possible)
+		$this->canonicalHost = [
+			// the matching host
+			!empty($this->canonicalRootUrl[0]) ? \parse_url($this->canonicalRootUrl[0], \PHP_URL_HOST) : null,
+			// the primary host
+			!empty($this->canonicalRootUrl[1]) ? \parse_url($this->canonicalRootUrl[1], \PHP_URL_HOST) : null
+		];
 
 		// detect the root path for the router from the root URL
 		$canonicalRootPath = \urldecode(\parse_url($this->canonicalRootUrl[0], \PHP_URL_PATH));
@@ -499,7 +497,7 @@ class App {
 	 * @return string|null
 	 */
 	public function getCanonicalHost($primary = null) {
-		return $primary ? $this->primaryHost : $this->canonicalHost;
+		return $this->canonicalHost[$primary ? 1 : 0];
 	}
 
 	/**
