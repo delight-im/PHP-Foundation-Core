@@ -781,6 +781,15 @@ class App {
 	}
 
 	/**
+	 * Returns whether the application is currently in debug mode
+	 *
+	 * @return bool
+	 */
+	public function isDebug() {
+		return !isset($_ENV['APP_DEBUG']) || $_ENV['APP_DEBUG'] === '1';
+	}
+
+	/**
 	 * Adds a new route for the HTTP request method `GET` and executes the specified callback if the route matches
 	 *
 	 * @param string $route the route to match, e.g. `/users/jane`
