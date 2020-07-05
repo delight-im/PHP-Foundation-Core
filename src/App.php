@@ -1041,6 +1041,51 @@ class App {
 		$this->getTemplateManager()->clearCache();
 	}
 
+	/**
+	 * Returns the value of the analytics and marketing parameter `utm_source` from the query string
+	 *
+	 * @return string|null
+	 */
+	public function getUtmSource() {
+		return !empty($_GET['utm_source']) ? \trim($_GET['utm_source']) : null;
+	}
+
+	/**
+	 * Returns the value of the analytics and marketing parameter `utm_medium` from the query string
+	 *
+	 * @return string|null
+	 */
+	public function getUtmMedium() {
+		return !empty($_GET['utm_medium']) ? \trim($_GET['utm_medium']) : null;
+	}
+
+	/**
+	 * Returns the value of the analytics and marketing parameter `utm_campaign` from the query string
+	 *
+	 * @return string|null
+	 */
+	public function getUtmCampaign() {
+		return !empty($_GET['utm_campaign']) ? \trim($_GET['utm_campaign']) : null;
+	}
+
+	/**
+	 * Returns the value of the analytics and marketing parameter `utm_term` from the query string
+	 *
+	 * @return string|null
+	 */
+	public function getUtmTerm() {
+		return !empty($_GET['utm_term']) ? \trim($_GET['utm_term']) : null;
+	}
+
+	/**
+	 * Returns the value of the analytics and marketing parameter `utm_content` from the query string
+	 *
+	 * @return string|null
+	 */
+	public function getUtmContent() {
+		return !empty($_GET['utm_content']) ? \trim($_GET['utm_content']) : null;
+	}
+
 	private static function determineCanonicalRootUrl($primary) {
 		if (isset($_ENV['APP_PUBLIC_URL'])) {
 			$candidates = \explode('|', $_ENV['APP_PUBLIC_URL']);
