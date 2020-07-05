@@ -493,7 +493,7 @@ class App {
 	/**
 	 * Returns the host as whitelisted in the configuration
 	 *
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical host
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical host
 	 * @return string|null
 	 */
 	public function getCanonicalHost($primary = null) {
@@ -513,7 +513,7 @@ class App {
 	 * Returns the public URL for the specified path below the root of this application
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function url($requestedPath, $primary = null) {
@@ -524,7 +524,7 @@ class App {
 	 * Returns the public URL for the specified path below the root of this application with a query parameter indicating the current locale
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function urlWithLang($requestedPath, $primary = null) {
@@ -544,7 +544,7 @@ class App {
 	 *
 	 * @param string $requestedPath the path below the root of this application, e.g. `/users`
 	 * @param array $params the parameters to append to the query
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function urlWithParams($requestedPath, array $params, $primary = null) {
@@ -566,7 +566,7 @@ class App {
 	/**
 	 * Returns the URL of the current request
 	 *
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function currentUrl($primary = null) {
@@ -576,7 +576,7 @@ class App {
 	/**
 	 * Returns the URL of the current request with a query parameter indicating the current locale
 	 *
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function currentUrlWithLang($primary = null) {
@@ -595,7 +595,7 @@ class App {
 	 * Returns the URL of the current request with the supplied parameters in the query
 	 *
 	 * @param array $params the parameters to append to the query
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function currentUrlWithParams(array $params, $primary = null) {
@@ -608,7 +608,7 @@ class App {
 	/**
 	 * Returns the URL of the current request along with its query string
 	 *
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function currentUrlWithQuery($primary = null) {
@@ -625,7 +625,7 @@ class App {
 	/**
 	 * Returns the URL of the current request along with its query string and an additional query parameter indicating the current locale
 	 *
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function currentUrlWithQueryAndLang($primary = null) {
@@ -644,7 +644,7 @@ class App {
 	 * Returns the URL of the current request along with its query string and the supplied additional parameters in the query
 	 *
 	 * @param array $params the parameters to append to the query
-	 * @param bool $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
+	 * @param bool|null $primary (optional) whether to prefer the matching (`false`) or the primary (`true`) canonical URL
 	 * @return string
 	 */
 	public function currentUrlWithQueryAndParams(array $params, $primary = null) {
