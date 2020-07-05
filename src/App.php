@@ -791,6 +791,31 @@ class App {
 	}
 
 	/**
+	 * Returns whether the current request appears to be a same-site request
+	 *
+	 * The result depends on the `Referer` HTTP response header, which can be faked by the client and could then cause wrong values, though that is unlikely with normal navigation by legitimate human users
+	 *
+	 * The detection will not work if your site sends the `Referrer-Policy: no-referrer` HTTP response header, includes the meta tag `<meta name="referrer" content="no-referrer">` in its HTML response, or includes the HTML attributes `rel="noreferrer"` or `referrerpolicy="no-referrer"` on internal links
+	 *
+	 * @return bool
+	 */
+	public function isSameSiteRequest() {
+		$referrer = $this->getReferrer(false);
+
+		if (empty($referrer)) {
+			return false;
+		}
+
+		$referrerHost = \parse_url($referrer, \PHP_URL_HOST);
+
+		if (empty($referrerHost)) {
+			return false;
+		}
+
+		return $referrerHost === $this->getCanonicalHost(false);
+	}
+
+	/**
 	 * Redirects to the specified path below the root of this application and ends execution of the current script
 	 *
 	 * @param string $targetPath the path below the root of this application, e.g. `/users`
