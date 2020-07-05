@@ -723,6 +723,25 @@ class App {
 	}
 
 	/**
+	 * Returns whether the user-agent string indicates that the client is a bot
+	 *
+	 * There is a small chance of false positives where a human uses a client with an uncommon user-agent string
+	 *
+	 * Actual bots may also choose not to reveal their identity in the user-agent string, or even fake it to claim to be a human-controlled client (false negatives)
+	 *
+	 * @return bool
+	 */
+	public function isBotAgent() {
+		$ua = $this->getUa();
+
+		if (empty($ua)) {
+			return true;
+		}
+
+		return \preg_match('/bot|spider|crawl/i', $ua) === 1;
+	}
+
+	/**
 	 * Returns whether the client's IP address is the address of the loopback interface
 	 *
 	 * @return bool
