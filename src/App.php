@@ -686,10 +686,22 @@ class App {
 	/**
 	 * Returns the URL of the referring page (or site) for the current request
 	 *
+	 * @param bool|null $primary (optional) whether to normalize any matching internal referrer URLs to use the primary canonical host
 	 * @return string|null
 	 */
-	public function getReferrer() {
-		return !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
+	public function getReferrer($primary = null) {
+		if (empty($_SERVER['HTTP_REFERER'])) {
+			return null;
+		}
+
+		if ($primary && !empty($this->canonicalHost[0]) && !empty($this->canonicalHost[1])) {
+			$actualHostRegex = '/' . \preg_quote($this->canonicalHost[0]) . '(?=\\/|$)/i';
+
+			return \preg_replace($actualHostRegex, $this->canonicalHost[1], $_SERVER['HTTP_REFERER'], 1);
+		}
+		else {
+			return $_SERVER['HTTP_REFERER'];
+		}
 	}
 
 	/**
